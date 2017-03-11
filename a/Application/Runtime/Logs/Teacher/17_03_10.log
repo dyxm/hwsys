@@ -1,0 +1,22 @@
+[ 2017-03-10T14:42:42+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/tasks/1/1/
+ERR: 无法加载控制器:Tasks
+
+[ 2017-03-10T14:45:30+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/tasks/1/1/
+ERR: 无法加载控制器:Tasks
+
+[ 2017-03-10T17:47:40+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/teacher/test.json
+ERR: 1054:Unknown column 'task.teacher.id' in 'field list'
+ [ SQL语句 ] : SELECT task.teacher.id FROM `hw_task` WHERE `task_id` = 38 
+
+[ 2017-03-10T20:21:12+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/task/1/38
+ERR: 1054:Unknown column 'stu_number' in 'field list'
+ [ SQL语句 ] : SELECT `student_id`,`stu_number`,`group_id`,`file_path`,`status`,`grade` FROM `hw_homework` WHERE `task_id` = 1 ORDER BY stu_number,group_id ASC 
+
+[ 2017-03-10T20:26:44+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/task/1/38
+ERR: 1054:Unknown column 'stu_number' in 'field list'
+ [ SQL语句 ] : SELECT `student_id`,`stu_number`,`group_id`,`file_path`,`status`,`grade` FROM `hw_homework` WHERE `task_id` = 1 ORDER BY stu_number,group_id ASC 
+
+[ 2017-03-10T20:26:59+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/task/1/38
+ERR: 1054:Unknown column 'stu_number' in 'field list'
+ [ SQL语句 ] : SELECT `student_id`,`stu_number`,`group_id`,`file_path`,`status`,`grade` FROM `hw_homework` WHERE `task_id` = 1 ORDER BY stu_number,group_id ASC 
+

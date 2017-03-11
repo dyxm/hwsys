@@ -1,0 +1,12 @@
+[ 2017-02-25T12:46:47+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 1146:Table 'hwsys.hw_cour__teac__class' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `hw_cour__teac__class`
+
+[ 2017-02-25T12:56:41+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 1054:Unknown column 'teacher.teacher_name' in 'field list'
+ [ SQL语句 ] : SELECT homework.homework_id AS homework_id,homework.task_id AS task_id,homework.group_id AS group_id,homework.status AS status,homework.upload_date AS upload_date,homework.file_name AS file_name,homework.file_path AS file_path,homework.grade AS grade,homework.is_open AS is_open,course.course_name AS course_name,teacher.teacher_name AS name FROM hw_homework homework  JOIN hw_task task ON homework.task_id=task.task_id  JOIN hw_cour_teac_class cour_teac_class ON task.cour_teac_class_id=cour_teac_class.cour_teac_class_id  JOIN hw_cour_teac cour_teac ON cour_teac_class.cour_teac_id=cour_teac.cour_teac_id  JOIN hw_course course ON cour_teac.course_id=course.course_id  JOIN hw_teacher teacher ON cour_teac.teacher_id=teacher.teacher_id WHERE `stu_id` = '1' AND homework.status = '0' LIMIT 1  
+
+[ 2017-02-25T14:17:04+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 1146:Table 'hwsys.hw_cour_teac_class' doesn't exist
+ [ SQL语句 ] : SHOW COLUMNS FROM `hw_cour_teac_class`
+

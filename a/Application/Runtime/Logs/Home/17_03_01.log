@@ -1,0 +1,43 @@
+[ 2017-03-01T14:47:57+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/classes/stu/1/2/1
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `student_id` = '1' AND `type` = '2'' at line 1
+ [ SQL语句 ] : SELECT * FROM  WHERE `student_id` = '1' AND `type` = '2' 
+
+[ 2017-03-01T14:47:57+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/classes/stu/1/1/1
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `student_id` = '1' AND `type` = '1'' at line 1
+ [ SQL语句 ] : SELECT * FROM  WHERE `student_id` = '1' AND `type` = '1' 
+
+[ 2017-03-01T14:48:39+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/classes/stu/1/2/1
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `student_id` = '1' AND `type` = '2' LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM  WHERE `student_id` = '1' AND `type` = '2' LIMIT 1  
+
+[ 2017-03-01T14:48:39+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/classes/stu/1/1/1
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE `student_id` = '1' AND `type` = '1' LIMIT 1' at line 1
+ [ SQL语句 ] : SELECT COUNT(*) AS tp_count FROM  WHERE `student_id` = '1' AND `type` = '1' LIMIT 1  
+
+[ 2017-03-01T20:23:10+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: Think\Model:relation方法不存在！
+
+[ 2017-03-01T20:23:40+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 非法操作:login
+
+[ 2017-03-01T20:24:53+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 非法操作:login
+
+[ 2017-03-01T20:25:48+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: Think\Model:relation方法不存在！
+
+[ 2017-03-01T20:40:17+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: Think\Model:relation方法不存在！
+
+[ 2017-03-01T20:40:21+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: Think\Model:relation方法不存在！
+
+[ 2017-03-01T20:49:41+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 非法操作:login
+
+[ 2017-03-01T20:55:18+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: Think\Model:relation方法不存在！
+
+[ 2017-03-01T20:59:38+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 非法操作:login
+

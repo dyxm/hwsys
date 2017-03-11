@@ -1,0 +1,15 @@
+[ 2017-02-24T20:57:04+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 非法操作:login
+
+[ 2017-02-24T21:28:27+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/login
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `type` = 1 AND `status` = 1' at line 1
+ [ SQL语句 ] : SELECT `name` FROM `hw_auth_rule` WHERE `id` IN () AND `type` = 1 AND `status` = 1 
+
+[ 2017-02-24T23:03:07+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 1054:Unknown column 'Task.title' in 'field list'
+ [ SQL语句 ] : SELECT Homework.homework_id AS homework_id,Homework.group_id AS group_id,Homework.status AS status,Task.title AS category_name,Course.name AS username FROM hw_homework Homework  JOIN hw_task Task ON homework.task_id=Task.task_id  JOIN hw_course Course ON Task.task_id=Course.course_id WHERE `stu_id` = '1' AND Homework.status = '0' LIMIT 1  
+
+[ 2017-02-24T23:04:48+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AS FROM hw_homework Homework  JOIN hw_task Task ON homework.task_id=Task.task_id' at line 1
+ [ SQL语句 ] : SELECT Homework. AS FROM hw_homework Homework  JOIN hw_task Task ON homework.task_id=Task.task_id  JOIN hw_course Course ON Task.task_id=Course.course_id WHERE `stu_id` = '1' AND `status` = '0' LIMIT 1  
+

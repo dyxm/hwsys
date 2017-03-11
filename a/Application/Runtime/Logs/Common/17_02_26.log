@@ -1,0 +1,30 @@
+[ 2017-02-26T15:04:28+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/newHomeworks/123
+ERR: 无法加载模块:NewHomeworks
+
+[ 2017-02-26T15:06:00+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/newHomeworks/1/0
+ERR: 无法加载模块:NewHomeworks
+
+[ 2017-02-26T15:06:37+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test.json
+ERR: 无法加载模块:Test
+
+[ 2017-02-26T15:06:44+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test/1.json
+ERR: 无法加载模块:Test
+
+[ 2017-02-26T15:06:52+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test/1.json
+ERR: 无法加载模块:Test
+
+[ 2017-02-26T15:06:54+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/test/1.json
+ERR: 无法加载模块:Test
+
+[ 2017-02-26T15:13:41+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/newHomeworks/
+ERR: 无法加载模块:NewHomeworks
+
+[ 2017-02-26T15:20:13+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/homeworks
+ERR: 无法加载模块:Homeworks
+
+[ 2017-02-26T16:24:13+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/oneHomework/1/[object%20Object]
+ERR: 无法加载模块:OneHomework
+
+[ 2017-02-26T21:21:25+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/meworkDetail/1/2
+ERR: 无法加载模块:MeworkDetail
+

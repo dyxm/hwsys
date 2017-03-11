@@ -1,0 +1,20 @@
+[ 2017-01-14T16:20:39+08:00 ] ::1 /PHPworkplace/hwsys/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000750s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003196s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003366s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.011408s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.011549s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.030871s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030982s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.001939s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002013s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002619s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002714s ]
+

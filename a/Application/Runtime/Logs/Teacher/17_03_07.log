@@ -1,0 +1,54 @@
+[ 2017-03-07T11:01:54+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T15:54:55+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:02:07+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:02:16+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:03:44+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:04:41+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:05:06+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:05:53+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses.json
+ERR: 无法加载控制器:Courses.json
+
+[ 2017-03-07T16:06:06+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:06:28+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:06:32+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses.json
+ERR: 无法加载控制器:Courses.json
+
+[ 2017-03-07T16:06:46+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1/undefined/undefined
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T16:08:06+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1/1/1
+ERR: 非法操作:courses
+
+[ 2017-03-07T16:15:54+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/test.json
+ERR: 1054:Unknown column 'assign_date' in 'order clause'
+ [ SQL语句 ] : SELECT * FROM `hw_course` WHERE `teacher_id` = 1 ORDER BY assign_date DESC 
+
+[ 2017-03-07T16:48:30+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/courses/1/3/undefined
+ERR: 无法加载控制器:Courses
+
+[ 2017-03-07T17:12:07+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/test.json
+ERR: 1054:Unknown column 'teacher.teacher_id' in 'where clause'
+ [ SQL语句 ] : SELECT course_class.course_class_id AS course_class_id,course_class.course_id AS course_id,course_class.class_id AS class_id,course_class.term AS term,course_class.is_group AS is_group,course_class.max_member_count AS max_member_count,course_class.grouping_deadline AS grouping_deadline,course_class.assign_date AS assign_date,class.class_id AS class_id,class.major_id AS major_id,class.class_name AS class_name,class.teacher_id AS teacher_id,class.monitor_id AS monitor_id,class.class_grade AS class_grade,class.class_type AS class_type,class.class_sort AS class_sort,class.class_join_pass AS class_join_pass,class.class_info AS class_info,class.class_create_date AS class_create_date,class.class_live_date AS class_live_date,class.class_status AS class_status,course.course_id AS course_id,course.teacher_id AS teacher_id,course.course_name AS course_name,course.course_type AS course_type,course.sourse_info AS sourse_info,course.course_status AS course_status,course.course_create_date AS course_create_date,course.course_modify_date AS course_modify_date FROM hw_course_class course_class  JOIN hw_class class ON course_class.class_id=class.class_id  JOIN hw_course course ON course_class.course_id=course.course_id WHERE teacher.teacher_id = 1 
+
+[ 2017-03-07T17:20:42+08:00 ] 127.0.0.1 /PHPworkplace/hwsys/api/Teacher/test.json
+ERR: 1052:Column 'teacher_id' in where clause is ambiguous
+ [ SQL语句 ] : SELECT course_class.course_class_id AS course_class_id,course_class.course_id AS course_id,course_class.class_id AS class_id,course_class.term AS term,course_class.is_group AS is_group,course_class.max_member_count AS max_member_count,course_class.grouping_deadline AS grouping_deadline,course_class.assign_date AS assign_date,class.class_id AS class_id,class.major_id AS major_id,class.class_name AS class_name,class.teacher_id AS teacher_id,class.monitor_id AS monitor_id,class.class_grade AS class_grade,class.class_type AS class_type,class.class_sort AS class_sort,class.class_join_pass AS class_join_pass,class.class_info AS class_info,class.class_create_date AS class_create_date,class.class_live_date AS class_live_date,class.class_status AS class_status,course.course_id AS course_id,course.teacher_id AS teacher_id,course.course_name AS course_name,course.course_type AS course_type,course.sourse_info AS sourse_info,course.course_status AS course_status,course.course_create_date AS course_create_date,course.course_modify_date AS course_modify_date FROM hw_course_class course_class  JOIN hw_class class ON course_class.class_id=class.class_id  JOIN hw_course course ON course_class.course_id=course.course_id WHERE ( teacher_id=1 ) 
+
