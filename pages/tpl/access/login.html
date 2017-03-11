@@ -1,0 +1,74 @@
+<!--
+  @登录界面
+  @作者：dyxm
+  @创建时间：2017-01-11
+-->
+<!-- <div href class="navbar-brand block h3 font-bold m-t-md">登录</div> -->
+<div class="container w-xxl w-auto-xs m-t-md no-padder b" ng-controller="loginCtrl" ng-init="app.settings.container = false;">
+	<div class="navbar-brand block h3 font-bold b-b">登录</div>
+	<div class="m-b-lg">
+		
+		<tabset class="nav-tabs-alt" justified="true">
+			<tab>
+				<tab-heading><div class="wrapper-xs">学生</div></tab-heading>
+				<div class="text-danger m-t text-center" ng-show="user.type=='Student'&&authError" ng-bind="authError"></div>
+				<form name="stuLoginForm" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-valid-email ng-valid-validator" ng-init="stu.type='Student'">
+					<div class="wrapper-md">
+						<div class="form-group">
+							<label>学号 <em class="text-muted">(10位数字)</em></label>
+							<input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="stu.id" ng-pattern="/^[0-9]{10}$/" required="">
+						</div>
+						<div class="form-group">
+							<label>密码 <em class="text-muted">(大于6位任意字符)</em></label>
+							<input type="password" placeholder="" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="stu.pass" ng-pattern="/^.{6,}$/" required="">
+						</div>
+						<button type="submit" class="btn btn-lg btn-dark btn-block m-t-lg" ng-click="stuLogin()" ng-disabled='stuLoginForm.$invalid'>登录</button>
+					</div>
+				</form>
+			</tab>
+			<tab>
+				<tab-heading><div class="wrapper-xs">教师</div></tab-heading>
+				<div class="text-danger m-t text-center" ng-show="user.type=='Teacher'&&authError" ng-bind="authError"></div>
+				<form name="tecLoginForm" class="form-validation ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-valid-email ng-valid-validator" ng-init="teac.type='Teacher'">
+					<div class="wrapper-md">
+						<div class="form-group">
+							<label>工号 <em class="text-muted">(10位数字)</em></label>
+							<input type="text" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="teac.id" ng-pattern="/^[0-9]{10}$/" required="">
+						</div>
+						<div class="form-group">
+							<label>密码 <em class="text-muted">(6~20位任意字符)</em></label>
+							<input type="password" placeholder="" class="form-control ng-pristine ng-invalid ng-invalid-required ng-valid-pattern ng-touched" ng-model="teac.pass" ng-pattern="/^.{6,20}$/" required="">
+						</div>
+						<button type="submit" class="btn btn-lg btn-dark btn-block m-t-lg" ng-click="teacLogin()" ng-disabled='tecLoginForm.$invalid'>登录</button>
+					</div>
+				</form>
+			</tab>
+			<tab>
+				<tab-heading><div class="wrapper-xs">管理员</div></tab-heading>
+				<div class="text-danger m-t text-center" ng-show="user.type=='Admin'&&authError" ng-bind="authError"></div>
+				<form name="adminLoginForm" class="form-validation" ng-init="admin.type='Admin'">
+					<div class="wrapper-md">
+						<div class="list-group list-group-sm">
+							<div class="list-group-item">
+								<input type="text" placeholder="工号或手机号" class="form-control no-border" ng-model="admin.id" required>
+							</div>
+							<div class="list-group-item">
+								<input type="password" placeholder="密码" class="form-control no-border" ng-model="admin.password" required>
+							</div>
+						</div>
+						<button type="submit" class="btn btn-lg btn-dark btn-block m-t-lg" ng-click="adminLogin()" ng-disabled='adminLoginForm.$invalid'>登录</button>
+					</div>
+				</form>
+			</tab>
+		</tabset>
+		<!-- <div class="list-group list-group-sm">
+			<div class="list-group-item">
+				<input type="text" placeholder="学号或手机号" class="form-control no-border" ng-model="user.stuID" required>
+			</div>
+			<div class="list-group-item">
+				<input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required>
+			</div>
+		</div> -->
+		<div class="pull-right m-b m-r"><a ui-sref="access.forgotPwd"><small>忘记密码?</small></a></div>
+	</div>
+</div>

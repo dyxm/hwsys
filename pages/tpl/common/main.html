@@ -1,0 +1,36 @@
+<!--
+  @主框架
+  @作者：dyxm
+  @创建时间：2017-01-3
+-->
+<!-- 顶部导航 -->
+<div data-ng-include=" 'tpl/common/header.html' " class="app-header navbar">
+</div>
+<!-- /顶部导航 -->
+
+<!-- 左部导航菜单 -->
+<div data-ng-include=" 'tpl/common/aside.html' " class="app-aside hidden-xs {{app.settings.asideColor}}">
+	<!-- nav -->
+	<nav ui-nav class="navi" ng-include="'tpl/common/teacNav.html'"></nav>
+	<!-- nav -->
+</div>
+<!-- /左部导航菜单 -->
+
+<!-- 主视图 -->
+<div class="app-content">
+	<div ui-butterbar></div>
+	<a href class="off-screen-toggle hide" ui-toggle-class="off-screen" data-target=".app-aside" ></a>
+	<div class="app-content-body fade-in-up" ui-view></div>
+</div>
+<!-- /主视图 -->
+
+<!-- 底部 -->
+<div class="app-footer wrapper b-t bg-light">
+	<span class="pull-right">{{app.version}} <a href ui-scroll="app" class="m-l-sm text-muted"><i class="fa fa-long-arrow-up"></i></a></span>
+	DYXM &copy; 2016 Copyright.
+</div>
+<!-- /底部 -->
+
+<!-- 右部悬浮设置按钮 -->
+<div data-ng-include=" 'tpl/blocks/settings.html' " class="settings panel panel-default"></div>
+<!-- /右部悬浮设置按钮 -->

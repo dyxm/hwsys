@@ -1,0 +1,85 @@
+<!--
+  @班级学生信息tpl
+  @作者：dyxm
+  @创建时间：2017-03-1
+-->
+<div class="panel-body m-b no-padder">
+	<!-- 显示方式按钮 -->
+	<div class="bg-light lter wrapper-sm m-b-sm b-t b-b" ng-init="showStuByPanel = true;showStuByTable = false">
+		<div class="clear">
+			<div class="pull-left m-t-xs text-muted font-bold">
+				<span class=" m-r-sm">全班共<span class="text-success m-l-xs m-r-xs">{{class.student_count}}</span>人</span>
+			</div>
+			<div class="btn-group pull-right">
+				<button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showStuByPanel}" ng-click="
+									showStuByPanel? '' : showStuByPanel=!showStuByPanel;
+									showStuByTable? showStuByTable=!showStuByTable : '' "><i class="fa fa-th-large"></i></button>
+				<button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showStuByTable}" ng-click="
+									showStuByTable? '' : showStuByTable=!showStuByTable;
+									showStuByPanel? showStuByPanel=!showStuByPanel : '' "><i class="fa fa-list-ul"></i></button>
+			</div>
+		</div>
+	</div>
+	<!-- /显示方式按钮 -->
+    <div ng-if="students[0]">
+        <!-- 显示方式1 -->
+        <div class="row m-t-xs padder animated fadeInRight" ng-class="{hide:!showStuByPanel}">
+            <div class="col-xs-4 col-sm-3 col-lg-2 wrapper-xs" ng-repeat="student in students">
+                <div class="panel panel-default">
+                    <div class="panel-heading no-padder {{app.settings.asideColor}} lter">
+                        <div class="clearfix text-center">
+                            <div class="thumb-md m-t m-b-xs">
+                                <img src="../{{student.face}}" class="img-circle" alt="{{student.name}}">
+                            </div>
+                            <div class="m-b-xs text-white">
+                                <i class="fa m-r-xs" ng-class="{'fa-male text-info':student.sex==0,'fa-female text-danger':student.sex==1}"></i>
+                                {{student.name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body no-padder">
+                        <ul class="list-group m-n">
+                            <li class="list-group-item no-border text-center text-ellipsis">{{student.stu_number}}</li>
+                            <!-- <a class="list-group-item b-t text-center text-ellipsis">
+                                <span class="text-muted">移出班级</span>
+                            </a> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /显示方式1 -->
+        <!-- 显示方式2 -->
+        <div class="table-responsive m-t-n-sm animated fadeInRight" ng-class="{hide:!showStuByTable}">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>姓名</th>
+                    <th>学号</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="b-b">
+                <tr ng-repeat="student in students">
+                    <td>{{$index+1}}</td>
+                    <td>
+                        <i class="fa m-r-xs" ng-class="{'fa-male text-info':student.sex==0,'fa-female text-danger':student.sex==1}"></i>
+                        {{student.name}}
+                    </td>
+                    <td>{{student.stu_number}}</td>
+                    <td>
+                        <!-- <button class="btn btn-xs btn-info disabled">移出班级</button> -->
+                        <small class="text-muted">不可操作</small>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- /显示方式2 -->
+    </div>
+
+    <div ng-if="!students[0]">
+        <h2 class="text-center text-muted m-t-xxl m-b-xxl">该班级暂无学生</h2>
+    </div>
+</div>

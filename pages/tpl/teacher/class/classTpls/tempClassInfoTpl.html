@@ -1,0 +1,47 @@
+<!--
+  @临时班级信息tpl
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<!-- 临时班级的班级信息 -->
+<ul class="list-group m-n no-border" collapse="!classMoreDetail">
+	<li class="list-group-item">
+		<i class="fa fa-clock-o fa-fw"></i> 
+		适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+	</li>
+	<li class="list-group-item">
+		<i class="fa fa-users fa-fw"></i> 
+		人数：<span class="pull-right text-muted"><span>255</span> 人</span>
+	</li>
+	<li class="list-group-item">
+		<i class="fa fa-building fa-fw"></i> 
+		加入口令：
+		<span class="pull-right text-muted" href="#">
+			dtrf23
+			<button class="btn btn-xs btn-default m-l-xs">复制</button>
+		</span>
+	</li>
+	<li class="list-group-item">
+		<i class="fa fa-calendar fa-fw"></i> 
+		有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+	</li>
+	<li class="list-group-item">
+		<div class="pull-right">
+			<button class="btn btn-xs btn-dark m-n" ng-class="{hide:editClassInfo}" ng-click="editClassInfo=!editClassInfo;">
+				<i class="fa fa-pencil-square-o"></i>
+				编辑
+			</button>
+			<button class="btn btn-xs btn-success m-n" ng-class="{hide:!editClassInfo}" ng-click="editClassInfo=!editClassInfo">
+				<i class="fa fa-check"></i>
+				完成
+			</button>
+		</div>
+		<i class="fa fa-info-circle fa-fw"></i>
+		班级介绍:
+		<p class="m-t-sm" ng-class="{hide:editClassInfo}">
+			这里是一段关于班级情况的简单介绍，班长、辅导员及更高级管理员有权编辑更改
+		</p>
+		<textarea class="form-control m-t-sm" rows="4" ng-class="{hide:!editClassInfo}">这里是一段关于班级情况的简单介绍，班长、辅导员及更高级管理员有权编辑更改</textarea>
+	</li>
+</ul>
+<!-- /临时班级的班级信息 -->

@@ -1,0 +1,24 @@
+<!-- 
+  @忘记密码界面
+  @作者：dyxm
+  @创建时间：2017-01-11
+-->
+<div class="container w-xl w-auto-xs m-t-md" ng-init="app.settings.container = false;">
+	<div href class="navbar-brand block h3 font-bold">找回密码</div>
+	<div class="m-b-lg">
+		<form name="findPwdForm" ng-init="isCollapsed=true">
+			<div class="list-group list-group-sm">
+				<div class="list-group-item">
+					<input type="email" placeholder="请输入绑定的邮箱" ng-model="email" class="form-control no-border" required>
+				</div>
+			</div>
+			<button type="submit" ng-disabled="findPwdForm.$invalid" class="btn btn-lg btn-dark btn-block"  ng-click="isCollapsed = !isCollapsed" >确定</button>
+		</form>
+		<div class="m-t-md">
+			<a class="btn btn-dark" ui-sref="access.login">
+				<i class="fa fa-long-arrow-left m-r-xs"></i>
+				返回
+			</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+<!--
+  @登录框架
+  @作者：dyxm
+  @创建时间：2017-01-3
+-->
+<div class="navbar navbar-default navbar-fixed-top b-b {{app.settings.navbarHeaderColor}} lt">
+	<div class="navbar-header text-white">
+		<a class="navbar-brand text-lt" ui-sref="access.welcome">
+			<i class="fa fa-folder-open-o"></i>
+			<span ng-bind="app.name"></span>
+		</a>
+	</div>
+	<ul class="nav navbar-nav navbar-right padder">
+		<li><a class="text-lt" ui-sref="access.login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li> 
+	</ul> 
+</div>
+<div ui-view class="fade-in-right-big smooth"></div>
+<div class="navbar navbar-default navbar-fixed-bottom b-t">
+	<p class="navbar-fixed-bottom wrapper m-t-xl text-center">DYXM &copy; 2016-2017 Copyright.</p>
+</div>

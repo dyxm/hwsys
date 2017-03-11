@@ -1,0 +1,104 @@
+<!--
+  @新建作业
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<!-- 新建作业 -->
+<div class="hbox hbox-auto-xs">
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>作业</li>
+				<li class="active">布置作业</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+
+		<div class="panel m-md b-a">
+			<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter">
+				<a class="media" title="13级计算机科学与技术（医学应用）">
+					<span class="pull-left">
+						<i class="fa fa-file-text-o fa-lg text-info-dk"></i>
+					</span>
+					<span class="text-lt h4 text-ellipsis">布置作业</span>
+				</a>
+			</div>
+			<div class="panel-body">
+				<form name="createTaskForm" class="form-validation ng-dirty ng-invalid ng-invalid-required ng-valid-pattern">
+					<div class="form-group">
+						<label>选择课程</label>
+						<input type="text" class="form-control ng-invalid ng-invalid-required" ng-class="{'ng-dirty ng-valid':task.course_name}" placeholder="请选择班级" ng-model="task.course_name" ng-focus="selectCourse()" required="">
+						<!--<select class="form-control ng-invalid ng-invalid-required" ng-model="task.course_id" onchange="angular.element(this).scope().courseChange(this)" required="">-->
+							<!--<option class="text-muted" value="">请选择一门课程</option>-->
+							<!--<option ng-repeat="course in courses" value="{{course.course_id}}">{{course.course_name}}</option>-->
+						<!--</select>-->
+					</div>
+					<div class="form-group">
+						<label>应用班级</label>
+						<input type="text" class="form-control ng-invalid ng-invalid-required" ng-class="{'ng-dirty ng-valid':task.class_name}" placeholder="请选择班级" ng-model="task.class_name" ng-focus="selectClass()" required="">
+						<!--<select class="form-control ng-invalid ng-invalid-required" ng-model="task.class_id" required="">-->
+							<!--<option class="text-muted" value="">请选择一门班级</option>-->
+							<!--<option>option 1</option>-->
+							<!--<option>option 2</option>-->
+							<!--<option>option 3</option>-->
+							<!--<option>option 4</option>-->
+						<!--</select>-->
+					</div>
+					<div class="form-group">
+						<label>作业名称</label>
+						<input type="text" class="form-control ng-invalid ng-invalid-required" placeholder="请输入作业名称" ng-model="task.task_name" ng-pattern="/^.{2,20}$/" required="">
+					</div>
+					<div class="form-group">
+						<label>作业要求</label>
+						<textarea class="form-control ng-invalid ng-invalid-required" rows="6" placeholder="请输入作业要求" ng-model="task.task_require" ng-pattern="/^.{2,100}$/"></textarea>
+					</div>
+					<!--<div class="form-group">-->
+						<!--<label>是否应用分组</label>-->
+						<!--<label class="i-switch i-switch bg-dark m-l" ng-if="task.is_group!=0">-->
+							<!--<input type="checkbox">-->
+							<!--<i class="m-t"></i>-->
+						<!--</label>-->
+						<!--<small class="text-muted m-l-sm" ng-if="task.is_group==0">该课程应用的班级暂未进行分组</small>-->
+					<!--</div>-->
+					<div class="form-group">
+						<label class="m-r-md">完成方式</label>
+						<label class="checkbox-inline i-checks">
+							<input type="radio" name="is_group" ng-click="task.is_apply_group=0" ng-checked="task.is_group==0"><i></i> 独立完成
+						</label>
+						<label class="checkbox-inline i-checks" ng-class="{'text-muted':task.is_group==0}">
+							<input type="radio" name="is_group" ng-click="task.is_apply_group=1" ng-disabled="task.is_group==0"><i></i> 分组完成
+							<small class="text-warning m-l-sm" ng-if="task.is_group==0">该课程应用的班级暂未进行分组</small>
+						</label>
+					</div>
+					<div class="form-group">
+						<label>完成日期</label>
+						<div class="clear" >
+							<div class="input-group">
+								<input type="text" id="deadline" class="form-control ng-invalid ng-invalid-required" ng-model="task.deadline" ng-focus="chooseDate()" required="">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">上传附件<small class="text-muted">(可选，允许的文件后缀 pdf，doc，docx，rar，zip，并且文件大小不超过20M)</small></label>
+						<div class="">
+							<input type="file" ng-model="task.attach_file" ui-jq="filestyle"  onchange="angular.element(this).scope().checkFile()">
+							<div class="pull-right h5" style="position:relative;top:-26px;right: 98px;z-index: 99" ng-if="fileDeleteBtn">
+								<a class="wrapper-sm" ng-click="deleteFile()"><i class="fa fa-times"></i></a>
+							</div>
+						</div>
+					</div>
+					<div class="m-t-lg text-center">
+						<button type="submit" class="btn btn-dark w-sm" ng-disabled="createTaskForm.$invalid" ng-click="createTask()">布置</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /新建作业 -->

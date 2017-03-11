@@ -1,0 +1,116 @@
+<!--
+  @我的班级
+  @作者：dyxm
+  @创建时间：2017-01-7
+-->
+<!-- <style>
+	.nav-tabs-alt .nav-tabs > li > a{
+		color: #98a6ad;
+	}
+	.nav-tabs-alt .nav-tabs > li.active > a{
+		color: #555;
+	}
+</style> -->
+<div class="hbox hbox-auto-xs">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>我的班级</li>
+				<li class="active">
+					<span ng-if="$stateParams.class_type==0">普通班级</span>
+					<span ng-if="$stateParams.class_type==1">公共必修班级</span>
+					<span ng-if="$stateParams.class_type==2">选修班级</span>
+				</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+
+		<!-- 班级列表 -->
+		<div class="wrapper">
+			<div class="row padder">
+				<div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="class in classes">
+					<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/student/classDetail/{{class.class_id}}">
+									<span class="pull-left"><i class="fa fa-building fa-lg text-info-dk"></i></span>
+									<span class="pull-right"><i class="fa fa-fw fa-angle-right fa-lg"></i></span>
+									<span class="media-body clear" ng-if="class.class_type==0">
+										<span class="h4 font-bold m-n text-ellipsis">{{class.class_grade+'级'+class.major_name+'【'+class.class_sort+'】班'}}</span>
+									</span>
+									<span class="media-body clear" ng-if="class.class_type!=0">
+										<span class="h4 font-bold m-n text-ellipsis">{{class.class_name+'【'+class.class_sort+'】班'}}</span>
+									</span>
+								</a>
+							</div>
+						</div>
+						<div class="list-group no-radius alt">
+							<li class="list-group-item" ng-if="class.class_type==0">
+								<i class="fa fa-mortar-board fa-fw"></i>
+								辅导员：<a class="pull-right text-muted" href="#">{{class.teacher_name?class.teacher_name:'暂未分配'}}</a>
+							</li>
+							<li class="list-group-item" ng-if="class.class_type==0">
+								<i class="fa fa-user fa-fw"></i>
+								班长：<a class="pull-right text-muted" href="#">{{class.monitor_name?class.monitor_name:'暂未分配'}}</a>
+							</li>
+							<li class="list-group-item" ng-if="class.class_type!=0">
+								<i class="fa fa-mortar-board fa-fw"></i>
+								科任老师：<span class="pull-right text-muted">{{class.teacher_name}}</span>
+							</li>
+							<li class="list-group-item" ng-if="class.class_type!=0">
+								<i class="fa fa-clock-o fa-fw"></i>
+								适用：<span class="pull-right text-muted">{{class.term_year+'学年第'+class.term+'学期'}}</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-users fa-fw"></i>
+								人数：<span class="pull-right text-muted">{{class.student_count}} 人</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-calendar fa-fw"></i>
+								有效期至：<span class="pull-right text-danger">{{class.class_live_date}}</span>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /班级列表 -->
+
+		<!-- 分页 -->
+		<div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+			<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+		</div>
+		<!-- /分页 -->
+
+		<div ng-if="!classes[0]">
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.class_type==0">竟然没有班级！</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.class_type==1">您没有任何公共必修记录！</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.class_type==2">您没有选修记录！</h2>
+		</div>
+	</div>
+	<!-- /主体 -->
+</div>
+
+
+<!--<tabset class="nav-tabs-alt" justified="true">-->
+	<!--<tab>-->
+		<!--<tab-heading class="font-bold">-->
+			<!--<h4>-->
+				<!--<i class="fa fa-building fa-fw"></i>-->
+				<!--普通班级-->
+			<!--</h4>-->
+		<!--</tab-heading>-->
+		<!--<div data-ng-include=" 'tpl/student/class/classTpls/staticClassTpl.html' " class="animated fadeInUp"></div>-->
+	<!--</tab>-->
+	<!--<tab>-->
+		<!--<tab-heading class="font-bold">-->
+			<!--<h4>-->
+				<!--<i class="fa fa-building-o fa-fw"></i>-->
+				<!--临时班级-->
+			<!--</h4>-->
+		<!--</tab-heading>-->
+		<!--<div data-ng-include=" 'tpl/student/class/classTpls/tempClassTpl.html' "></div>-->
+	<!--</tab>-->
+<!--</tabset>-->

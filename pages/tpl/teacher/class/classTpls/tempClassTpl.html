@@ -1,0 +1,345 @@
+<!--
+  @临时班级tpl
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<!-- 临时班级列表 -->
+<div>
+	<!-- 可用班级 -->
+	<form name="onClassForm">
+		<!-- 按钮栏 -->
+		<div class="wrapper-sm m-b-sm bg-light dk" ng-init="editOnClass = true;seleteAllOnClass = false">
+			<div class="clear">
+				<h4 class="pull-left m-t-xs m-b-n text-muted font-bold" ng-class="{hide:!editOnClass}">可用班级</h4>
+				<div class="pull-left">
+					<button class="btn btn-sm btn-dark m-n animated fadeInLeft" ng-class="{hide:editOnClass||seleteAllOnClass}" ng-click="seleteAllOnClass=!seleteAllOnClass;">全选</button>
+
+					<button class="btn btn-sm btn-dark m-n" ng-class="{hide:!seleteAllOnClass}" ng-click="seleteAllOnClass=!seleteAllOnClass;">取消全选</button>
+
+					<button class="btn btn-sm btn-danger m-n animated fadeInLeft" ng-class="{hide:editOnClass}">禁用</button>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-sm btn-dark m-n animated fadeIn" ng-class="{hide:!editOnClass}" ng-click="editOnClass=!editOnClass;">
+						<i class="fa fa-pencil-square-o"></i>
+						编辑
+					</button>
+
+					<button class="btn btn-sm btn-success m-n animated fadeIn" ng-class="{hide:editOnClass}" ng-click="editOnClass=!editOnClass;seleteAllOnClass = false">
+						<i class="fa fa-check"></i>
+						完成
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- /按钮栏 -->
+		<div class="row padder form-group">
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="panel b-a m-t-sm">
+					<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+						<div>
+							<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOnClass}" >
+								<label class="i-checks">
+									<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOnClass" value="">
+									<i></i>
+								</label>
+							</div>
+							<div class="media m-n">
+								<span class="pull-left">
+									<i class="fa fa-building-o fa-lg text-info-dk"></i>
+								</span>
+								<span class="pull-right animated fadeInRight" ng-class="{hide:editOnClass}" >
+									<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOnClass=!editOnClass;">
+										禁用
+									</button>
+								</span>
+								<a class="media-body clear" href="#/main/classDetail/1">
+									<span class="pull-right" ng-class="{hide:!editOnClass}" >
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<h4 class="font-bold m-n text-ellipsis">[选修]舞蹈鉴赏</h4>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="list-group no-radius alt">
+						<li class="list-group-item">
+							<i class="fa fa-mortar-board fa-fw"></i> 
+							创建老师：<span class="pull-right text-muted">梁佩琳</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-clock-o fa-fw"></i> 
+							适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-users fa-fw"></i> 
+							人数：<span class="pull-right text-muted"><span>255</span> 人</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-calendar fa-fw"></i> 
+							有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+						</li>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="panel b-a m-t-sm">
+					<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+						<div>
+							<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOnClass}" >
+								<label class="i-checks">
+									<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOnClass" value="">
+									<i></i>
+								</label>
+							</div>
+							<div class="media m-n">
+								<span class="pull-left">
+									<i class="fa fa-building-o fa-lg text-info-dk"></i>
+								</span>
+								<span class="pull-right animated fadeInRight" ng-class="{hide:editOnClass}" >
+									<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOnClass=!editOnClass;">
+										禁用
+									</button>
+								</span>
+								<a class="media-body clear" href="#/main/classDetail/1">
+									<span class="pull-right" ng-class="{hide:!editOnClass}" >
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<h4 class="font-bold m-n text-ellipsis">[选修]信息技术与创业</h4>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="list-group no-radius alt">
+						<li class="list-group-item">
+							<i class="fa fa-mortar-board fa-fw"></i> 
+							创建老师：<span class="pull-right text-muted">梁佩琳</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-clock-o fa-fw"></i> 
+							适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-users fa-fw"></i> 
+							人数：<span class="pull-right text-muted"><span>60</span> 人</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-calendar fa-fw"></i> 
+							有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- /可用班级 -->
+
+	<!-- 失效班级 -->
+	<form name="offClassForm">
+		<div class="wrapper-sm m-b-sm bg-light dk" ng-init="editOffClass = true;seleteAllOffClass = false">
+			<div class="clear">
+				<h4 class="pull-left m-t-xs m-b-n text-muted font-bold" ng-class="{hide:!editOffClass}">失效班级</h4>
+				<div class="pull-left">
+					<button class="btn btn-sm btn-dark m-n animated fadeInLeft" ng-class="{hide:editOffClass||seleteAllOffClass}" ng-click="seleteAllOffClass=!seleteAllOffClass;">全选</button>
+
+					<button class="btn btn-sm btn-dark m-n" ng-class="{hide:!seleteAllOffClass}" ng-click="seleteAllOffClass=!seleteAllOffClass;">取消全选</button>
+
+					<button class="btn btn-sm btn-danger m-n animated fadeInLeft" ng-class="{hide:editOffClass}">删除</button>
+				</div>
+				<div class="pull-right">
+					<button class="btn btn-sm btn-dark m-n animated fadeIn" ng-class="{hide:!editOffClass}" ng-click="editOffClass=!editOffClass;">
+						<i class="fa fa-pencil-square-o"></i>
+						编辑
+					</button>
+
+					<button class="btn btn-sm btn-bg btn-success m-n animated fadeIn" ng-class="{hide:editOffClass}" ng-click="editOffClass=!editOffClass;seleteAllOffClass = false">
+						<i class="fa fa-check"></i>
+						完成
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row padder form-group">
+			<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="panel b-a m-t-sm">
+					<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+						<div>
+							<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOffClass}" >
+								<label class="i-checks">
+									<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOffClass" value="">
+									<i></i>
+								</label>
+							</div>
+							<div class="media m-n">
+								<span class="pull-left">
+									<i class="fa fa-building-o fa-lg text-muted"></i>
+								</span>
+								<span class="pull-right animated fadeInRight" ng-class="{hide:editOffClass}" >
+									<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOffClass=!editOffClass;">
+										删除
+									</button>
+								</span>
+								<a class="media-body clear" href="#/main/classDetail/1">
+									<span class="pull-right" ng-class="{hide:!editOffClass}" >
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<h4 class="font-bold m-n text-ellipsis">[选修]信息技术与创业</h4>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="list-group no-radius alt">
+						<li class="list-group-item">
+							<i class="fa fa-mortar-board fa-fw"></i> 
+							创建老师：<span class="pull-right text-muted">梁佩琳</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-clock-o fa-fw"></i> 
+							适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-users fa-fw"></i> 
+							人数：<span class="pull-right text-muted"><span>255</span> 人</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-calendar fa-fw"></i> 
+							有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+						</li>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<!-- /失效班级 -->
+
+	<!-- 分页 -->
+	<div class="text-center m-t-lg m-b-lg">
+		<ul class="pagination pagination-md">
+			<li class="disabled"><a href><i class="fa fa-chevron-left"></i></a></li>
+			<li class="active"><a href>1</a></li>
+			<li><a href>2</a></li>
+			<li><a href>3</a></li>
+			<li><a href>4</a></li>
+			<li><a href>5</a></li>
+			<li><a href><i class="fa fa-chevron-right"></i></a></li>
+		</ul>
+	</div>
+	<!-- /分页 -->
+</div>
+<!-- /临时班级列表 -->	
+
+
+<!-- /班级列表 -->
+<!-- 固定班级列表 -->
+		<!-- <div class="wrapper b-b">
+			<h4 class="text-muted font-bold">固定班级</h4>
+			<div class="row padder">
+				<div class="col-xs-12 col-sm-6 col-lg-4">
+				<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/main/classDetail/1">
+									<span class="pull-left">
+										<i class="fa fa-building fa-lg text-info-dk"></i>
+									</span>
+									<span class="pull-right">
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<div class="media-body clear">
+										<h4 class="font-bold m-n text-ellipsis">13级计算机科学与技术（医学应用）</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="list-group no-radius alt">
+							<li class="list-group-item">
+								<i class="fa fa-mortar-board fa-fw"></i> 
+								辅导员：<a class="pull-right text-muted" href="#">孙苗</a>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-user fa-fw"></i> 
+								班长：<a class="pull-right text-muted" href="#">丘映威</a>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-users fa-fw"></i> 
+								人数：<span class="pull-right text-muted"><span>60</span> 人</span>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- /固定班级列表 -->
+		
+		<!-- 临时班级列表 -->
+		<!-- <div class="wrapper">
+			<h4 class="text-muted font-bold">临时班级</h4>
+			<div class="row padder">
+				<div class="col-xs-12 col-sm-6 col-lg-4">
+					<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/main/classDetail/1">
+									<span class="pull-left">
+										<i class="fa fa-building fa-lg text-info-dk"></i>
+									</span>
+									<span class="pull-right">
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<div class="media-body clear">
+										<h4 class="font-bold m-n text-ellipsis">13级计算机科学与技术（医学应用）</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="list-group no-radius alt">
+							<li class="list-group-item">
+								<i class="fa fa-mortar-board fa-fw"></i> 
+								创建老师：<span class="pull-right text-muted">梁佩琳</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-users fa-fw"></i> 
+								人数：<span class="pull-right text-muted"><span>60</span> 人</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-clock-o fa-fw"></i> 
+								有效期：<span class="pull-right text-muted">一年</span>
+							</li>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-lg-4">
+					<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/main/classDetail/1">
+									<span class="pull-left">
+										<i class="fa fa-building fa-lg text-info-dk"></i>
+									</span>
+									<span class="pull-right">
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<div class="media-body clear">
+										<h4 class="font-bold m-n text-ellipsis">13级计算机科学与技术（医学应用）</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="list-group no-radius alt">
+							<li class="list-group-item">
+								<i class="fa fa-mortar-board fa-fw"></i> 
+								创建老师：<span class="pull-right text-muted">梁佩琳</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-users fa-fw"></i> 
+								人数：<span class="pull-right text-muted"><span>60</span> 人</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-clock-o fa-fw"></i> 
+								有效期：<span class="pull-right text-muted">一年</span>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+		<!-- /临时班级列表 -->

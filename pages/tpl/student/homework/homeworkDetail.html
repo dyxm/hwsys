@@ -1,0 +1,695 @@
+<!--
+  @作业详情
+  @作者：dyxm
+  @创建时间：2017-01-5
+-->
+<!-- 主体 -->
+<div ng-if="homework">
+    <div class="hbox hbox-auto-xs">
+        <div class="col">
+            <!-- 面包屑导航 -->
+            <div class="bg-light lter b-b wrapper-md">
+                <a class="btn btn-md btn-dark pull-right m-t-n-xs" href ui-toggle-class="show"
+                   target="#homeworkCommentPanel">
+                    <i class="fa fa-comments m-r-xs"></i>
+                    吐槽
+                </a>
+                <ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+                    <li>作业</li>
+                    <li><a ui-sref="student.myHomework">我的作业</a></li>
+                    <!--<li class="active">{{'【'+homework.course_name+'】'+homework.task_name}}</li>-->
+                    <li class="active">{{homework.course_name}}</li>
+                </ol>
+            </div>
+            <!-- /面包屑导航 -->
+
+
+            <div class="padder m-t">
+                <ul class="timeline">
+                    <li class="tl-header">
+                        <div class="btn btn-dark">{{homework.task_name}}</div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-dark">
+                            <span class="tl-date">{{homework.create_date | date:'yyyy.MM.dd'}}</span>
+                            <div class="tl-content panel padder b-a block ">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt m-b-sm h4 font-bold">作业要求</div>
+                                <div class="panel-body pull-in b-t b-light">
+                                    <div class="m-b-md">
+                                        {{homework.task_require}}
+                                    </div>
+                                    <div class="m-b-md">
+                                        <i class="fa fa-paperclip fa-fw m-r-xs"></i>
+                                        <a class="text-info" href="./../{{homework.attach_file_path+homework.attach_file_name}}">{{homework.attach_file_name}}</a>
+                                    </div>
+                                    <div class=""><span class="text-muted pull-right">By：{{homework.teacher_name}}老师</span></div>
+                                </div>
+                                <div class="panel-footer padder pull-in b-t b-light">
+                                    <div class="clear m-b-n-sm">
+                                        <div class="pull-right text-muted">
+                                            <i class="fa fa-calendar text-info"></i>
+                                            截止日期：
+                                            <span class="text-danger">{{homework.deadline|date:'yyyy-MM-dd H:m:s'}}</span>
+                                            <span class="label pos-rlt m-l inline bg-danger">
+                                                 <i class="arrow left arrow-danger"></i>
+                                                {{week}}
+                                            </span>
+                                            <span class="label bg-danger m-l-xs wapper"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap" ng-class="{'b-warning':homework.status==0&&!isDeadline,'b-success':homework.status==1,'b-danger':homework.status==0&&isDeadline}">
+                            <span class="tl-date" ng-if="homework.status==1">{{homework.upload_date | date:'yyyy.MM.dd'}}</span>
+                            <div class="tl-content panel padder b-a block" ng-init="uploadPanel=true">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt h4 font-bold">
+                                    <div ng-click="uploadPanel = !uploadPanel">
+                                        <span href class="auto m-t-xs">
+                                            <span class="pull-right text-muted wapper">
+                                                <i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:uploadPanel}'></i>
+                                                <i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!uploadPanel}'></i>
+                                            </span>
+                                        </span>
+                                        交作业
+                                    </div>
+                                </div>
+                                <div class="panel-body pull-in b-t m-t-sm" collapse="!uploadPanel">
+                                    <div class="m-t-md m-b-md">
+                                        <!-- 上传文件 -->
+                                        <form name="uploadHomeworkForm" class="form-validation padder-md" ng-if="homework.status==0 && !isDeadline">
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input ng-model="homeworkFile" onchange="angular.element(this).scope().fileChange()" type="file" ui-jq="filestyle">
+                                                </div>
+                                                <div class="m-t-lg text-center">
+                                                    <button class="btn btn-success padder-lg" ng-class="{disabled:isFileEmpty}" ng-click="uplaodHomework()" id="uploadFileBtn">
+                                                        <i class="fa fa-upload m-r-xs"></i>
+                                                        上传
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- /上传文件 -->
+                                        <!-- 已截止文字提示 -->
+                                        <div ng-if="homework.status==0 && isDeadline">
+                                            <h3 class="text-center text-danger">
+                                                <i class="fa fa-times"></i>
+                                                已过上交截止日期！
+                                            </h3>
+                                        </div>
+                                        <!-- /已截止文字提示 -->
+                                        <!-- 已上传文字提示 -->
+                                        <div ng-if="homework.status==1">
+                                            <h3 class="text-center text-success">
+                                                <i class="fa fa-check-square-o"></i>
+                                                作业已交
+                                            </h3>
+                                            <div class="m-t-md">
+                                                <i class="fa fa-file-word-o fa-fw m-r-xs"></i>
+                                                <a class="text-info" href="./../{{homework.attach_file_path+homework.attach_file_name}}" target="_blank">{{homework.file_name}}</a>
+                                            </div>
+                                        </div>
+                                        <!-- /已上传文字提示 -->
+                                    </div>
+                                </div>
+                                <div class="panel-footer padder pull-in b-t b-light" ng-if="!isDeadline">
+                                    <div class="clear m-b-n-sm">
+                                        <button class="btn btn-sm btn-success pull-right" ng-click="reSend()">
+                                            <small>重交?</small>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-dark">
+                            <span class="tl-date" ng-if="isDeadline">截止{{homework.deadline | date:'yyyy.MM.dd'}}</span>
+                            <span class="tl-date" ng-if="!isDeadline">此刻</span>
+                            <div class="tl-content panel padder b-a block " ng-init="seeMorePanel=true">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt h4 font-bold" ng-click="seeMorePanel = !seeMorePanel">
+                                    <span href class="auto m-t-xs">
+                                        <span class="pull-right text-muted wapper">
+                                            <i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:seeMorePanel}'></i>
+                                            <i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!seeMorePanel}'></i>
+                                        </span>
+                                    </span>
+                                    <span class="m-r-sm" ng-if="homework.is_apply_group==0"><span class="text-success">{{homework.uploaded_count}}</span> 人已交</span>
+                                    <span class="m-r-sm" ng-if="homework.is_apply_group!=0"><span class="text-success">{{homework.uploaded_count}}</span> 个小组已交</span>
+                                    <span class="m-t-xs" ng-if="homework.is_apply_group==0"><span class="text-danger">{{homework.noUpload_count}}</span> 人未交</span>
+                                    <span class="m-t-xs" ng-if="homework.is_apply_group!=0"><span class="">{{homework.noUpload_count}}</span> 个小组未交</span>
+                                </div>
+                                <div class="panel-body m-t-sm no-padder pull-in b-t" collapse="!seeMorePanel">
+                                    <!-- 显示方式按钮 -->
+                                    <div class="wrapper-sm clear" ng-init="showHwInfoPanel = true;showHwInfoTable = false">
+                                        <div class="btn-group pull-right">
+                                            <button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showHwInfoPanel}" ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i class="fa fa-th-large"></i></button>
+                                            <button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showHwInfoTable}" ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i class="fa fa-list-ul"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /显示方式按钮 -->
+                                    <!-- 显示方式1 -->
+                                    <div class="row m-t-xs padder" ng-class="{hide:!showHwInfoPanel}">
+                                        <div class="col-xs-3 col-md-2 col-lg-1 wrapper-xs" ng-repeat="other in others">
+                                            <div class="panel b-a">
+                                                <div class="panel-heading r-t r-r text-center {{app.settings.asideColor}} lt">{{(homework.is_apply_group==0)?other.student_name:other.group_name}}</div>
+                                                <div class="hbox text-center b-t b-light" ng-if="other.status==0">
+                                                    <span href class="col padder-v text-danger" title="他还未交作业">
+                                                    <i class="fa fa-frown-o"></i>
+                                                    <small>未交</small>
+                                                    </span>
+                                                </div>
+                                                <div class="hbox text-center b-t b-light" ng-if="homework.status==0 && other.status==1">
+                                                    <span href class="col padder-v text-success">
+                                                        <i class="fa fa-check"></i>
+                                                        <small>已交</small>
+                                                    </span>
+                                                </div>
+                                                <div class="hbox text-center b-t b-light" ng-if="homework.status==1 && other.status==1">
+                                                    <span class="col padder-v text-muted b-r b-light" title="该作业不公开" ng-if="other.is_open==0 && other.student_id!=userInfo.id">
+                                                        <i class="fa fa-eye-slash"></i>
+                                                    </span>
+                                                    <a href class="col padder-v b-r b-light text-success" title="点击下载他的作业" ng-if="other.is_open==1 && other.student_id!=userInfo.id">
+                                                        <i class="fa fa-file-word-o"></i>
+                                                    </a>
+                                                    <a href class="col padder-v b-r b-light text-success" title="作业为公开状态,点击可修改" ng-if="other.is_open==1 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href class="col padder-v b-r b-light text-muted" title="作业为不公开状态,点击可修改" ng-if="other.is_open==0 && other.student_id==userInfo.id"  ng-click="changeProperty($index,other.homework_id,other.is_open)">
+                                                        <i class="fa fa-eye-slash"></i>
+                                                    </a>
+                                                    <span href class="col padder-v text-muted">
+                                                        <small>{{(other.grade!=0)?other.grade+' 分':'未评'}}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /显示方式1 -->
+                                    <!-- 显示方式2 -->
+                                    <div class="table-responsive m-t" ng-class="{hide:!showHwInfoTable}">
+                                        <table class="table table-striped b-t b-light">
+                                            <thead>
+                                            <tr>
+                                                <th>姓名</th>
+                                                <th>状态</th>
+                                                <th>得分</th>
+                                                <th>是否公开</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="b-b">
+                                            <tr ng-repeat="other in others">
+                                                <td ng-class="{'text-muted':other.status==0}">{{(homework.is_apply_group==0)?other.student_name:other.group_name}}</td>
+                                                <td>
+                                                    <small class="text-success" ng-if="other.status==1"><i class="fa fa-check"></i> 已交</small>
+                                                    <small class="text-danger" ng-if="other.status==0"><i class="fa fa-times"></i> 未交</small>
+                                                </td>
+                                                <td>
+                                                    <span class="font-bold" ng-if="other.grade!=0">{{other.grade}} 分</span>
+                                                    <small class="text-muted" ng-if="other.grade==0">未评分</small>
+                                                </td>
+                                                <td>
+                                                    <small class="text-muted" ng-if="other.status==0">- - - -</small>
+                                                    <small class="text-muted" ng-if="other.status==1 && other.is_open==0"><i class="fa fa-eye-slash"></i> 不公开</small>
+                                                    <small class="" ng-if="other.status==1 && other.is_open==1"><i class="fa fa-eye"></i> 公开</small>
+                                                </td>
+                                                <td ng-if="other.status==0 || homework.status==0">
+                                                    <small class="text-muted">不可操作</small>
+                                                </td>
+                                                <td ng-if="other.status==1 && homework.status==1">
+                                                    <small class="text-muted" ng-if="other.is_open==0 && other.student_id!=userInfo.id">不可操作</small>
+                                                    <a class="btn btn-xs btn-info" ng-if="other.is_open==1 && other.student_id!=userInfo.id">查看</a>
+                                                    <a class="btn btn-xs btn-info" ng-if="other.is_open==1 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">设为不公开</a>
+                                                    <a class="btn btn-xs btn-info" ng-if="other.is_open==0 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">设为公开</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /显示方式2 -->
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-success" ng-if="!isDeadline">
+                            <span class="tl-date">此刻</span>
+                            <div class="tl-content panel padder b-a">
+                                <div class="text-lt font-bold text-success">收集中···</div>
+                            </div>
+                        </div>
+                        <div class="tl-wrap b-danger" ng-if="isDeadline">
+                            <span class="tl-date">{{homework.deadline | date:'yyyy.MM.dd'}}</span>
+                            <div class="tl-content panel padder b-a">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt font-bold text-danger">已截止</div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="tl-header">-->
+                        <!--<div class="btn btn-sm btn-dark btn-rounded">作业收集完毕</div>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /主体 -->
+</div>
+
+<div ng-if="!homework">
+    <h2 class="text-center text-muted m-t-xxl">作业不存在！</h2>
+</div>
+
+
+<!-- 右部吐槽栏 -->
+<div class="app-aside-right no-padder w-xl w-auto-xs bg-white b-l animated fadeInRight hide"
+     id="homeworkCommentPanel" style="z-index:1010;">
+    <div class="vbox">
+        <div class="wrapper b-b b-t b-light m-b text-muted">
+            <a href class="pull-right text-md text-muted" ui-toggle-class="show" target=".app-aside-right"><i
+                    class="icon-close"></i></a>
+            吐了个槽~
+        </div>
+        <div class="row-row">
+            <div class="cell">
+                <div class="cell-inner padder">
+
+                    <div class="m-b-lg">
+                        <div class="pull-left thumb-xs avatar">
+                            <a href><img src="img/a2.jpg" alt=""></a>
+                        </div>
+                        <div class="clear">
+                            <div class="m-l-sm panel b-a">
+                                <div class="panel-heading pos-rlt b-b b-light text-muted ">
+                                    <span class="arrow left"></span>
+                                    郭旭辉
+                                    <a class="text-muted m-l-sm pull-right" href>
+                                        <i class="fa fa-thumbs-up"></i>
+                                        12
+                                    </a>
+                                </div>
+                                <div class="panel-body">
+                                    <p class="">好难啊这次作业！</p>
+                                    <small class="pull-right text-muted m-b-n-sm">2017-01-6 13:25:42</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-b-lg">
+                        <div class="pull-left thumb-xs avatar">
+                            <a href><img src="img/a2.jpg" alt=""></a>
+                            <small class="block text-center text-muted m-t-xs">杜锦荣</small>
+                        </div>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm r m-l-sm bg-info">
+                                <span class="arrow arrow-info left pull-up"></span>
+                                <p class="m-b-none">大佬都说难了，还让不让人活了o(￣ヘ￣o#)！！</p>
+                            </div>
+                            <small class="text-muted pull-right">2017-01-6 13:25:42</small>
+                        </div>
+                    </div>
+                    <div class="m-b-lg">
+                        <div class="pull-left thumb-xs avatar">
+                            <a href><img src="img/a2.jpg" alt=""></a>
+                            <small class="block text-center text-muted m-t-xs">关浩宇</small>
+                        </div>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm bg-primary r m-l-sm">
+                                <span class="arrow arrow-primary left pull-up"></span>
+                                <p class="m-b-none">问题不大~</p>
+                            </div>
+                            <small class="text-muted pull-right">2017-01-6 13:25:42</small>
+                        </div>
+                    </div>
+                    <div class="m-b-lg">
+                        <div class="pull-left thumb-xs avatar">
+                            <a href><img src="img/a2.jpg" alt=""></a>
+                            <small class="block text-center text-muted m-t-xs">关浩宇</small>
+                        </div>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm bg-dark r m-l-sm">
+                                <span class="arrow arrow-dark left pull-up"></span>
+                                <p class="m-b-none">问题不大~</p>
+                            </div>
+                            <small class="text-muted pull-right">2017-01-6 13:25:42</small>
+                        </div>
+                    </div>
+                    <div class="m-bm-b-lg">
+                        <div class="pull-right thumb-xs avatar">
+                            <a href><img src="img/a2.jpg" alt=""></a>
+                            <small class="block text-center text-muted m-t-xs">我</small>
+                        </div>
+                        <div class="clear">
+                            <div class="pos-rlt wrapper-sm b bg-success r m-r-sm">
+                                <span class="arrow right pull-up arrow-success"></span>
+                                <p class="m-b-none">放心，二哥不涂沐浴露的</p>
+                            </div>
+                            <small class="text-muted">2017-01-6 13:27:42</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper m-t b-t b-light">
+            <form class="m-b-none">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Say something">
+                    <span class="input-group-btn">
+						<button class="btn btn-success" type="button">
+							<i class="fa fa-paper-plane m-r-xs"></i> 发送
+						</button>
+					</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- /右部吐槽栏 -->
+
+<!-- 作业详细主体 -->
+<!--<div class="panel m-md b-a" ng-init="hwMoreDetail = false">-->
+<!--<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lt">-->
+<!--<a class="block" href ng-click="hwMoreDetail = !hwMoreDetail">-->
+<!--<i class="fa fa-file-word-o fa-2x text-info-dk"></i>-->
+<!--<span href class="auto m-t-xs">-->
+<!--<span class="pull-right text-muted wapper">-->
+<!--<i class="fa fa-fw fa-angle-right fa-2x" ng-class='{hide:hwMoreDetail}'></i>-->
+<!--<i class="fa fa-fw fa-angle-down fa-2x" ng-class='{hide:!hwMoreDetail}'></i>-->
+<!--</span>-->
+<!--</span>-->
+<!--<span class="text-lt lead m-l-sm"-->
+<!--ng-bind="'【'+homework.course_name+'】'+homework.task_name"></span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<ul class="list-group" collapse="!hwMoreDetail">-->
+<!--<li class="list-group-item">-->
+<!--<div class="row">-->
+<!--<div class="col-xs-5 col-sm-3">-->
+<!--<i class="fa fa-building fa-fw"></i>-->
+<!--班级：-->
+<!--</div>-->
+<!--<div class="col-xs-7 col-sm-9">-->
+<!--<a class="pull-right text-muted" href="#">{{homework.class_name}}</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</li>-->
+<!--<li class="list-group-item">-->
+<!--<div class="row">-->
+<!--<div class="col-xs-6 col-sm-5">-->
+<!--<i class="fa fa-book fa-fw"></i>-->
+<!--课程：-->
+<!--</div>-->
+<!--<div class="col-xs-6 col-sm-7 text-ellipsis">-->
+<!--<a class="pull-right text-muted" href="#">{{homework.course_name}}</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</li>-->
+<!--<li class="list-group-item">-->
+<!--<div class="row">-->
+<!--<div class="col-xs-6 col-sm-5">-->
+<!--<i class="fa fa-mortar-board fa-fw"></i>-->
+<!--科任老师：-->
+<!--</div>-->
+<!--<div class="col-xs-6 col-sm-7 text-ellipsis">-->
+<!--<a class="pull-right text-muted" href="#">{{homework.teacher_name}}</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--</li>-->
+<!--<li class="list-group-item">-->
+<!--<i class="fa fa-calendar fa-fw"></i>-->
+<!--布置日期：<span class="pull-right text-muted">{{homework.create_date}}</span>-->
+<!--</li>-->
+<!--<li class="list-group-item">-->
+<!--<i class="fa fa-spinner fa-fw"></i>-->
+<!--状态：-->
+<!--<span class="pull-right text-success" ng-if="!isDeadline">收集中···</span>-->
+<!--<span class="pull-right text-muted" ng-if="isDeadline">已截止</span>-->
+<!--</li>-->
+<!--</ul>-->
+<!--<div class="panel-body m-b">-->
+<!--<div class="m-b-xxl">-->
+<!--<span class="label pos-rlt m-r inline wrapper-sm bg-dark text-white">-->
+<!--<i class="fa fa-bookmark fa-fw m-r-xs"></i>-->
+<!--<i class="arrow right arrow-dark"></i>-->
+<!--要求-->
+<!--</span>-->
+<!--<span class="lead">{{homework.task_require}}</span>-->
+<!--</div>-->
+<!--<div class="m-b-lg">-->
+<!--<span class="label pos-rlt m-r inline wrapper-sm bg-dark text-white">-->
+<!--<i class="fa fa-paperclip fa-fw m-r-xs"></i>-->
+<!--<i class="arrow right arrow-dark"></i>-->
+<!--附件-->
+<!--</span>-->
+<!--<a class="text-info">{{homework.attach_file_name}}</a>-->
+<!--</div>-->
+<!--<div class="m-t-xxl" ng-if="homework.status==1">-->
+<!--<span class="label pos-rlt m-r inline wrapper-sm bg-dark text-white">-->
+<!--<i class="fa fa-file-word-o fa-fw m-r-xs"></i>-->
+<!--<i class="arrow right arrow-dark"></i>-->
+<!--我交的作业-->
+<!--</span>-->
+<!--<a class="text-info" href="./../{{homework.file_path}}" target="_blank">{{homework.file_name}}</a>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="panel-footer">-->
+<!--<div class="clear">-->
+<!--<div></div>-->
+<!--<div class="pull-right text-muted">-->
+<!--<i class="fa fa-calendar text-info"></i>-->
+<!--截止日期：-->
+<!--<span class="text-danger">{{homework.deadline}}</span>-->
+<!--<span class="label pos-rlt m-l inline bg-danger">-->
+<!--<i class="arrow left arrow-danger"></i>-->
+<!--{{week}}-->
+<!--</span>-->
+<!--<span class="label bg-danger m-l-xs wapper"></span>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- /作业详细主体 -->
+
+<!-- 分组情况面板 -->
+<!--<div class="panel m-md b-a" ng-init="groupPanel = false">-->
+<!--<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter">-->
+<!--<a class="block" href ng-click="groupPanel = !groupPanel">-->
+<!--<i class="fa fa-group fa-lg {{groupPanel? 'text-info-dk':'text-muted'}}"></i>-->
+<!--<span href class="auto m-t-xs">-->
+<!--<span class="pull-right text-muted wapper">-->
+<!--<i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:groupPanel}'></i>-->
+<!--<i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!groupPanel}'></i>-->
+<!--</span>-->
+<!--</span>-->
+<!--<span class="text-lt m-l-xs h4">分组</span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="panel-body m-b" collapse="!groupPanel">-->
+<!--<div class="m-b">-->
+<!--&lt;!&ndash; 分组详情 &ndash;&gt;-->
+<!--<div class="">-->
+
+<!--</div>-->
+<!--&lt;!&ndash; /分组详情 &ndash;&gt;-->
+
+<!--&lt;!&ndash; 文字提示 &ndash;&gt;-->
+<!--<div ng-if="homework.is_apply_group==0">-->
+<!--<h3 class="text-center text-muted">本次作业是单独完成~</h3>-->
+<!--</div>-->
+<!--&lt;!&ndash; /文字提示 &ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- /分组情况面板 -->
+
+<!-- 交作业面板 -->
+<!--<div class="panel m-md b-a" ng-init="uploadPanel = false">-->
+<!--<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter">-->
+<!--<a class="block" href ng-click="uploadPanel = !uploadPanel">-->
+<!--<i class="fa fa-upload fa-lg {{uploadPanel? 'text-info-dk':'text-muted'}}"></i>-->
+<!--<span href class="auto m-t-xs">-->
+<!--<span class="pull-right text-muted wapper">-->
+<!--<i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:uploadPanel}'></i>-->
+<!--<i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!uploadPanel}'></i>-->
+<!--</span>-->
+<!--</span>-->
+<!--<span class="text-lt m-l-xs h4">交作业</span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="panel-body m-b" collapse="!uploadPanel">-->
+<!--<div class="m-lg">-->
+<!--&lt;!&ndash; 上传文件 &ndash;&gt;-->
+<!--<form name="uploadHomeworkForm" class="form-validation" ng-if="homework.status==0 && !isDeadline">-->
+<!--<div class="form-group">-->
+<!--<div class="padder-lg">-->
+<!--&lt;!&ndash; ui-jq="filestyle" &ndash;&gt;-->
+<!--<input ng-model="homeworkFile" onchange="angular.element(this).scope().fileChange()"type="file" ui-jq="filestyle">-->
+<!--</div>-->
+<!--<div class="m-t-lg text-center">-->
+<!--<button class="btn btn-success padder-lg" ng-class="{disabled:isFileEmpty}" ng-click="uplaodHomework()" id="uploadFileBtn">-->
+<!--<i class="fa fa-upload m-r-xs"></i>-->
+<!--上传-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--&lt;!&ndash; /上传文件 &ndash;&gt;-->
+
+<!--&lt;!&ndash; 已截止文字提示 &ndash;&gt;-->
+<!--<div ng-if="homework.status==0 && isDeadline">-->
+<!--<h3 class="text-center text-danger">-->
+<!--<i class="fa fa-times"></i>-->
+<!--已过上交截止日期！-->
+<!--</h3>-->
+<!--</div>-->
+<!--&lt;!&ndash; /已截止文字提示 &ndash;&gt;-->
+
+<!--&lt;!&ndash; 已上传文字提示 &ndash;&gt;-->
+<!--<div ng-if="homework.status==1">-->
+<!--<h3 class="text-center text-success">-->
+<!--<i class="fa fa-check-square-o"></i>-->
+<!--作业已交-->
+<!--</h3>-->
+<!--<div class="clear">-->
+<!--<button class="btn btn-sm btn-success pull-right" ng-if="!isDeadline" ng-click="reSend()">-->
+<!--<small>重交?</small>-->
+<!--</button>-->
+<!--</div>-->
+<!--<p class="text-muted pull-right">最近一次提交在 {{homework.last_modify_time}}</p>-->
+<!--</div>-->
+<!--&lt;!&ndash; /已上传文字提示 &ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- /交作业面板 -->
+
+<!-- 查看上交情况 -->
+<!--<div class="panel m-md b-a" ng-init="seeMorePanel = false">-->
+<!--<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter">-->
+<!--<a class="block" href ng-click="seeMorePanel = !seeMorePanel">-->
+<!--<i class="fa fa-eye fa-lg {{seeMorePanel? 'text-info-dk':'text-muted'}}"></i>-->
+<!--<span href class="auto m-t-xs">-->
+<!--<span class="pull-right text-muted wapper">-->
+<!--<i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:seeMorePanel}'></i>-->
+<!--<i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!seeMorePanel}'></i>-->
+<!--</span>-->
+<!--</span>-->
+<!--<span class="text-lt m-l-xs h4">看看其他人？</span>-->
+<!--</a>-->
+<!--</div>-->
+<!--<div class="panel-body m-b no-padder" collapse="!seeMorePanel">-->
+<!--&lt;!&ndash; 显示方式按钮 &ndash;&gt;-->
+<!--<div class="bg-light lter b-b wrapper-sm m-b-sm"-->
+<!--ng-init="showHwInfoPanel = true;showHwInfoTable = false">-->
+<!--<div class="clear">-->
+<!--<div class="pull-left m-t-xs text-muted font-bold">-->
+<!--<span class=" m-r-sm" ng-if="homework.is_apply_group==0"><span class="text-success">{{homework.uploaded_count}}</span> 人已交</span>-->
+<!--<span class=" m-r-sm" ng-if="homework.is_apply_group!=0"><span class="text-success">{{homework.uploaded_count}}</span> 个小组已交</span>-->
+<!--<span class="m-t-xs" ng-if="homework.is_apply_group==0"><span class="text-danger">{{homework.noUpload_count}}</span> 人未交</span>-->
+<!--<span class="m-t-xs" ng-if="homework.is_apply_group!=0"><span class="">{{homework.noUpload_count}}</span> 个小组未交</span>-->
+<!--</div>-->
+<!--<div class="btn-group pull-right">-->
+<!--<button class="btn navbar-btn btn-sm btn-bg btn-default m-n"-->
+<!--ng-class="{active:showHwInfoPanel}"-->
+<!--ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i-->
+<!--class="fa fa-th-large"></i></button>-->
+<!--<button class="btn navbar-btn btn-sm btn-bg btn-default m-n"-->
+<!--ng-class="{active:showHwInfoTable}"-->
+<!--ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i-->
+<!--class="fa fa-list-ul"></i></button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; /显示方式按钮 &ndash;&gt;-->
+
+<!--&lt;!&ndash; 显示方式1 &ndash;&gt;-->
+<!--<div class="row m-t-xs padder" ng-class="{hide:!showHwInfoPanel}">-->
+<!--<div class="col-xs-3 col-md-2 col-lg-1 wrapper-xs" ng-repeat="other in others">-->
+<!--<div class="panel b-a">-->
+<!--&lt;!&ndash;<div class="panel-heading r-t r-r text-center lt" ng-if="other.status==0">{{(homework.is_apply_group==0)?other.student_name:other.group_name}}</div>&ndash;&gt;-->
+<!--<div class="panel-heading r-t r-r text-center {{app.settings.asideColor}} lt">{{(homework.is_apply_group==0)?other.student_name:other.group_name}}</div>-->
+<!--<div class="hbox text-center b-t b-light" ng-if="other.status==0">-->
+<!--<span href class="col padder-v text-danger" title="他还未交作业">-->
+<!--<i class="fa fa-frown-o"></i>-->
+<!--<small>未交</small>-->
+<!--</span>-->
+<!--</div>-->
+<!--<div class="hbox text-center b-t b-light" ng-if="homework.status==0 && other.status==1">-->
+<!--<span href class="col padder-v text-success">-->
+<!--<i class="fa fa-check"></i>-->
+<!--<small>已交</small>-->
+<!--</span>-->
+<!--</div>-->
+<!--<div class="hbox text-center b-t b-light" ng-if="homework.status==1 && other.status==1">-->
+<!--<span class="col padder-v text-muted b-r b-light" title="该作业不公开" ng-if="other.is_open==0 && other.student_id!=userInfo.id">-->
+<!--<i class="fa fa-eye-slash"></i>-->
+<!--</span>-->
+<!--<a href class="col padder-v b-r b-light text-success" title="点击下载他的作业" ng-if="other.is_open==1 && other.student_id!=userInfo.id">-->
+<!--<i class="fa fa-file-word-o"></i>-->
+<!--</a>-->
+<!--<a href class="col padder-v b-r b-light text-success" title="作业为公开状态,点击可修改" ng-if="other.is_open==1 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">-->
+<!--<i class="fa fa-eye"></i>-->
+<!--</a>-->
+<!--<a href class="col padder-v b-r b-light text-muted" title="作业为不公开状态,点击可修改" ng-if="other.is_open==0 && other.student_id==userInfo.id"  ng-click="changeProperty($index,other.homework_id,other.is_open)">-->
+<!--<i class="fa fa-eye-slash"></i>-->
+<!--</a>-->
+<!--<span href class="col padder-v text-muted">-->
+<!--<small>{{(other.grade!=0)?other.grade+' 分':'未评'}}</small>-->
+<!--</span>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--&lt;!&ndash; /显示方式1 &ndash;&gt;-->
+
+<!--&lt;!&ndash; 显示方式2 &ndash;&gt;-->
+<!--<div class="table-responsive m-t-n-sm" ng-class="{hide:!showHwInfoTable}">-->
+<!--<table class="table table-striped b-t b-light">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>姓名</th>-->
+<!--<th>状态</th>-->
+<!--<th>得分</th>-->
+<!--<th>是否公开</th>-->
+<!--<th>操作</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody class="b-b">-->
+<!--<tr ng-repeat="other in others">-->
+<!--<td ng-class="{'text-muted':other.status==0}">{{(homework.is_apply_group==0)?other.student_name:other.group_name}}</td>-->
+<!--<td>-->
+<!--<small class="text-success" ng-if="other.status==1"><i class="fa fa-check"></i> 已交</small>-->
+<!--<small class="text-danger" ng-if="other.status==0"><i class="fa fa-times"></i> 未交</small>-->
+<!--</td>-->
+<!--<td>-->
+<!--<span class="font-bold" ng-if="other.grade!=0">{{other.grade}} 分</span>-->
+<!--<small class="text-muted" ng-if="other.grade==0">未评分</small>-->
+<!--</td>-->
+<!--<td>-->
+<!--<small class="text-muted" ng-if="other.status==0">- - - -</small>-->
+<!--<small class="text-muted" ng-if="other.status==1 && other.is_open==0"><i class="fa fa-eye-slash"></i> 不公开</small>-->
+<!--<small class="" ng-if="other.status==1 && other.is_open==1"><i class="fa fa-eye"></i> 公开</small>-->
+<!--</td>-->
+<!--<td ng-if="other.status==0 || homework.status==0">-->
+<!--<small class="text-muted">不可操作</small>-->
+<!--</td>-->
+<!--<td ng-if="other.status==1 && homework.status==1">-->
+<!--<small class="text-muted" ng-if="other.is_open==0 && other.student_id!=userInfo.id">不可操作</small>-->
+<!--<a class="btn btn-xs btn-info" ng-if="other.is_open==1 && other.student_id!=userInfo.id">查看</a>-->
+<!--<a class="btn btn-xs btn-info" ng-if="other.is_open==1 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">设为不公开</a>-->
+<!--<a class="btn btn-xs btn-info" ng-if="other.is_open==0 && other.student_id==userInfo.id" ng-click="changeProperty($index,other.homework_id,other.is_open)">设为公开</a>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!-- /查看上交情况 -->

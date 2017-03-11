@@ -1,0 +1,121 @@
+<!--
+  @作业分布
+  @作者：dyxm
+  @创建时间：2017-03-9
+-->
+<div class="hbox hbox-auto-xs">
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<a class="btn btn-md btn-dark pull-right m-t-n-xs" ui-sref="teacher.createTask">
+				<i class="fa fa-plus m-r-xs"></i>
+				新建任务
+			</a>
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>作业</li>
+				<li class="active">作业分布</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+		<div class="wrapper">
+			<!--条件选择栏-->
+			<div class="form-group">
+				<div class="inline m-r-sm m-b">
+					<label class="control-label">类别：</label>
+					<select ui-jq="chosen" class="w-sm w-auto-xs"  chosen="{no_results_text: '没有找到',allow_single_deselect: true}" data-placeholder="选择一个类别" ng-model="course_type" ng-change="typeChange()">
+						<option value=""></option>
+						<option value="0">专业必修课</option>
+						<option value="1">公共必修课</option>
+						<option value="2">选修课</option>
+					</select>
+				</div>
+				<div class="inline m-r-sm m-b">
+					<label class="control-label">课程：</label>
+					<select ui-jq="chosen" class="chosen-select w-sm" data-placeholder="选择一门课程" ng-model="course_id" ng-change="courseChange()" id="selectCourse">
+						<option value=""></option>
+					</select>
+				</div>
+				<div class="inline m-r-sm m-b">
+					<label class="control-label">班级：</label>
+					<select ui-jq="chosen" class="w-md" data-placeholder="选择一个班级" ng-model="course_class_id" ng-change="classChange()" id="selectClass">
+						<option value=""></option>
+					</select>
+				</div>
+				<div class="inline m-b">
+					<button class="btn btn-dark" ng-click="search()">
+						<i class="fa fa-search"></i>
+						查询
+					</button>
+				</div>
+			</div>
+			<!--/条件选择栏-->
+
+			<!--作业列表-->
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="task in tasks">
+					<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/teacher/taskDetail/{{task.task_id}}">
+									<span class="pull-left">
+										<i class="fa fa-file-word-o fa-lg text-info-dk"></i>
+									</span>
+									<span class="pull-right">
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<div class="media-body clear">
+										<h4 class="font-bold m-n text-ellipsis">{{task.task_name}}</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="list-group">
+							<li class="list-group-item">
+								<span class="text-ellipsis">
+									<i class="fa fa-tag fa-fw"></i>
+									要求：
+									<span class="text-muted">{{task.task_require}}</span>
+								</span>
+							</li>
+							<li class="list-group-item">
+								<span class="text-ellipsis">
+									<i class="fa fa-paperclip fa-fw"></i>
+									附件：
+									<a class="text-info" href="./../{{task.attach_file_path + task.attach_file_name}}">{{task.attach_file_name?task.attach_file_name:'没有上传附件'}}</a>
+								</span>
+							</li>
+							<li class="hbox text-center b-t b-light">
+								<span class="col padder-v text-muted b-r b-light">
+									<i class="fa fa-user fa-fw" ng-if="task.is_apply_group!=1"></i>
+									<i class="fa fa-users fa-fw" ng-if="task.is_apply_group==1"></i>
+									<span class="text-muted">{{task.is_apply_group==0?'独立完成':'分组完成'}}</span>
+								</span>
+								<span class="col padder-v text-muted">
+									<span class="text-danger" ng-if="task.isDeadline==1">
+										<i class="fa fa-ban fa-fw"></i>
+										已截止
+									</span>
+									<span class="text-success" ng-if="task.isDeadline==0">
+										<i class="fa fa-spinner fa-fw"></i>
+										进行中···
+									</span>
+								</span>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-if="!tasks[0]">
+				<h2 class="text-center text-muted m-t-xxl m-b-xxl">暂无作业情况</h2>
+			</div>
+
+			<!-- 分页 -->
+			<div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+				<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+			</div>
+			<!--/作业列表-->
+		</div>
+
+	</div>
+</div>

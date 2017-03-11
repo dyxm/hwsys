@@ -1,0 +1,56 @@
+<!--
+  @班级信息tpl
+  @作者：dyxm
+  @创建时间：2017-03-1
+-->
+<!-- 临时班级的班级信息 -->
+<ul class="list-group m-n no-border" collapse="!classMoreDetail">
+	<li class="list-group-item">
+		<i class="fa fa-mortar-board fa-fw"></i>
+		负责老师：<a class="pull-right text-muted" href="#">{{class.teacher_name?class.teacher_name:'暂未分配'}}</a>
+	</li>
+	<li class="list-group-item" ng-if="class.class_type==0">
+		<i class="fa fa-user fa-fw"></i>
+		班长：<a class="pull-right text-muted" href="#">{{class.monitor_name?class.monitor_name:'暂未分配'}}</a>
+	</li>
+	<li class="list-group-item" ng-if="class.class_type!=0">
+		<i class="fa fa-clock-o fa-fw"></i>
+		适用：<span class="pull-right text-muted">{{class.term_year+'学年第'+class.term+'学期'}}</span>
+	</li>
+	<li class="list-group-item">
+		<i class="fa fa-users fa-fw"></i> 
+		人数：<span class="pull-right text-muted">{{class.student_count}} 人</span>
+	</li>
+	<li class="list-group-item" ng-if="class.class_type==2">
+		<i class="fa fa-building fa-fw"></i> 
+		加入口令：
+		<span class="pull-right text-muted" href="#">
+			{{class.join_pass}}
+			<button class="btn btn-xs btn-default m-l-xs">复制</button>
+		</span>
+	</li>
+	<li class="list-group-item">
+		<i class="fa fa-calendar fa-fw"></i> 
+		有效期至：<span class="pull-right text-danger">{{class.class_live_date}}</span>
+	</li>
+	<li class="list-group-item">
+		<div class="pull-right" ng-if="userInfo.id==class.monitor_id">
+			<button class="btn btn-xs btn-dark m-n" ng-class="{hide:editClassInfo}" ng-click="editClassInfo=!editClassInfo;">
+				<i class="fa fa-pencil-square-o"></i>
+				编辑
+			</button>
+			<button class="btn btn-xs btn-success m-n" ng-class="{hide:!editClassInfo}" ng-click="editClassInfo=!editClassInfo">
+				<i class="fa fa-check"></i>
+				完成
+			</button>
+		</div>
+		<i class="fa fa-info-circle fa-fw"></i>
+		班级介绍:
+		<p class="m-t-sm" ng-class="{hide:editClassInfo}">
+			{{class.class_info}}
+			<span class="text-muted" ng-if="!class.class_info">暂无有关班级的任何介绍~</span>
+		</p>
+		<textarea class="form-control m-t-sm" rows="4" ng-class="{hide:!editClassInfo}" ng-model="class.class_info"></textarea>
+	</li>
+</ul>
+<!-- /临时班级的班级信息 -->

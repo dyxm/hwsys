@@ -1,0 +1,44 @@
+<!--
+  @选择课程模态框
+  @作者：dyxm
+  @创建时间：2017-03-7
+-->
+<div class="modal-header bg-dark">
+    <button class="close" ng-click="close()">
+        <i class="fa fa-times text-white"></i>
+    </button>
+    <h4 class="modal-title font-bold text-center text-white">我的课程</h4>
+</div>
+
+<tabset justified="true" class="tab-container m-b-n">
+    <tab heading="专业必修" ng-click="changeCourseType(0)"><div ng-include="'courseBlock.html'"></div></tab>
+    <tab heading="公共必修" ng-click="changeCourseType(1)"><div ng-include="'courseBlock.html'"></div></tab>
+    <tab heading="选修" ng-click="changeCourseType(2)"><div ng-include="'courseBlock.html'"></div></tab>
+</tabset>
+
+<!-- 分页 -->
+<div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+</div>
+<!-- /分页 -->
+
+<div class="modal-footer m-t no-border">
+    <button class="btn btn-default" ng-click="close()">关闭</button>
+    <button class="btn btn-dark" ng-disabled='last_choose==-1' ng-click="ok()">确定</button>
+</div>
+
+
+<!--课程列表模板-->
+<script type="text/ng-template" id="courseBlock.html">
+    <div class="clear">
+        <div class="col-xs-4" ng-repeat="course in courses">
+            <a class="block panel padder-v item bg-dark" ng-class="{'lter':!course.isChosen,'dk':course.isChosen}" ng-click="selectCourse($index)">
+                <span class="top radio text-right w-full m-t-xxs h3"><i class="fa fa-check text-success m-r-xs" ng-class="{'hide':!course.isChosen}"></i></span>
+                <span class="block wrapper-sm m-n font-bold text-center text-white text-ellipsis">{{course.course_name}}</span>
+            </a>
+        </div>
+        <div ng-if="!courses[0]">
+            <h3 class="text-center text-muted m-t-l m-b-xxl">暂无开设相关课程</h3>
+        </div>
+    </div>
+</script>

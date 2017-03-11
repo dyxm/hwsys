@@ -1,0 +1,157 @@
+<!--
+  @左侧栏中间导航部分
+  @作者：dyxm
+  @创建时间：2017-01-3
+-->
+<!-- 左部导航菜单开始  -->
+<ul class="nav">
+  <!-- 班级菜单栏 -->
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>班级管理</span>
+  </li>
+  <!-- <li ui-sref-active="active">
+    <a ui-sref="main.joinClass">
+      <i class="glyphicon glyphicon-log-in icon text-info-dker"></i>
+      <span class="font-bold">加入班级</span>
+    </a>
+  </li> -->
+  <li ui-sref-active="active">
+    <a ui-sref="main.myClass">
+      <i class="glyphicon glyphicon-tags icon text-info-dker"></i>
+      <span class="font-bold">我的班级</span>
+    </a>
+  </li>
+  <!-- <li ui-sref-active="active">
+    <a ui-sref="main.createClass">
+      <i class="glyphicon glyphicon-plus icon text-info-dker"></i>
+      <span class="font-bold">创建班级</span>
+    </a>
+  </li> -->
+  <li ui-sref-active="active">
+    <a ui-sref="main.hasCreated">
+      <i class="glyphicon glyphicon-th-large icon text-info-dker"></i>
+      <span class="font-bold">已建班级</span>
+    </a>
+  </li>
+  <!-- <li>
+    <a href class="auto">      
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-th icon text-info-dker"></i>
+      <span class="font-bold">班级管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li ui-sref-active="active">
+        <a ui-sref="main.joinClass">
+          <span class="font-bold">加入班级</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="main.hasJoined">
+          <span class="font-bold">已加班级</span>
+          <span class="pull-right text-primary">4</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="main.createClass">
+          <span class="font-bold">创建班级</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="main.hasCreated">
+          <span class="font-bold">已建班级</span>
+          <span class="pull-right text-info">10</span>
+        </a>
+      </li>
+    </ul>
+  </li> -->
+  <!-- /班级菜单栏 -->
+
+  <!-- 霸气分割线 -->
+  <li class="line dk"></li>
+  <!-- /霸气分割线 -->
+  
+  <!-- 课程菜单栏 -->
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>课程管理</span>
+  </li>      
+  <li ui-sref-active="active">
+    <a ui-sref="main.userInfo">
+      <i class="glyphicon glyphicon-book icon text-info-dker"></i>
+      <span class="font-bold">我的课程</span>
+    </a>
+  </li>
+  <!-- /课程菜单栏 -->
+
+  <!-- 霸气分割线 -->
+  <li class="line dk"></li>
+  <!-- /霸气分割线 -->
+  
+  <!-- 作业菜单栏 -->
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>作业管理</span>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="main.myHomework">
+      <i class="glyphicon glyphicon-pencil icon text-info-dker"></i>
+      <span class="font-bold">我的作业</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="main.hasSend">
+      <i class="glyphicon glyphicon-ok icon text-info-dker"></i>
+      <span class="font-bold">已交作业</span>
+    </a>
+  </li>
+  <!-- <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <b class="badge bg-danger pull-right">3</b>
+      <i class="glyphicon glyphicon-stats icon text-info-dker"></i>
+      <span class="font-bold">作业管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li ui-sref-active="active">
+        <a ui-sref="main.myHomework">
+          <b class="badge bg-danger pull-right">3</b>
+          <span class="font-bold">我的作业</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="main.hasSend">
+          <span class="font-bold">已交作业</span>
+          <span class="pull-right text-info">21</span>
+        </a>
+      </li>
+    </ul>
+  </li> -->
+  <!-- /作业菜单栏 -->
+
+  <!-- 霸气分割线 -->
+  <li class="line dk"></li>
+  <!-- /霸气分割线 -->
+  
+  <!-- 用户菜单栏 -->
+  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+    <span>用户</span>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="main.userInfo">
+      <i class="glyphicon glyphicon-user icon text-info-dker"></i>
+      <span class="font-bold">个人中心</span>
+    </a>
+  </li>
+  <li ui-sref-active="active">
+    <a ui-sref="main.userInfo">
+      <i class="glyphicon glyphicon-cog icon text-info-dker"></i>
+      <span class="font-bold">个性设置</span>
+    </a>
+  </li>
+  <!-- /用户菜单栏 -->
+</ul>
+<!-- /左部导航菜单结束  

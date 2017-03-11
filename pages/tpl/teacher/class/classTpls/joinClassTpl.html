@@ -1,0 +1,38 @@
+<!--
+  @加入班级tpl
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<!-- 加入班级tpl -->
+<div>
+	<a class="btn btn-md btn-dark m-t-n-xs pull-right" data-toggle="modal" data-target="#classPassModal">
+		<i class="fa fa-plus m-r-xs"></i>
+		加入班级
+	</a>
+	<!-- 口令验证模态框 -->
+	<div class="modal fade" id="classPassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal" aria-hidden="true">
+						<i class="fa fa-times"></i>
+					</button>
+					<h4 class="modal-title font-bold" id="myModalLabel">口令验证</h4>
+				</div>
+				<div class="modal-body">
+					<div class="wrapper">
+						<form role="form" class="ng-pristine ng-valid">
+							<input type="email" class="form-control" placeholder="请输入班级的加入口令...">
+						</form>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button class="btn btn-dark">确定</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /口令验证模态框 -->
+</div>
+<!-- /加入班级tpl -->

@@ -1,0 +1,212 @@
+<!--
+  @任务详情
+  @作者：dyxm
+  @创建时间：2017-03-10
+-->
+<!-- 主体 -->
+<div ng-if="task">
+    <div class="hbox hbox-auto-xs">
+        <div class="col">
+            <!-- 面包屑导航 -->
+            <div class="bg-light lter b-b wrapper-md">
+                <a class="btn btn-md btn-dark pull-right m-t-n-xs" href ui-toggle-class="show"
+                   target="#taskCommentPanel">
+                    <i class="fa fa-comments m-r-xs"></i>
+                    吐槽
+                </a>
+                <ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+                    <li>任务</li>
+                    <li><a ui-sref="teacher.taskDistribution">任务分布</a></li>
+                    <li>{{task.course_name}}</li>
+                    <li class="active">{{task.class_name}}</li>
+                </ol>
+            </div>
+            <!-- /面包屑导航 -->
+            <div class="padder m-t">
+                <ul class="timeline">
+                    <li class="tl-header">
+                        <div class="btn btn-info">{{task.task_name}}</div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-info">
+                            <span class="tl-date">{{task.task_create_date*1000 | date:'yyyy.MM.dd  H:m:s'}}</span>
+                            <div class="tl-content panel padder b-a block ">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt m-b-sm h4 font-bold">任务要求</div>
+                                <div class="panel-body pull-in b-t b-light">
+                                    <div class="m-b-md">
+                                        {{task.task_require}}
+                                    </div>
+                                    <div class="m-b-md" ng-if="task.attach_file_name">
+                                        <i class="fa fa-paperclip fa-fw m-r-xs"></i>
+                                        <a class="text-info" href="./../{{task.attach_file_path+task.attach_file_name}}">{{task.attach_file_name}}</a>
+                                    </div>
+                                    <div class="padder-v m-b-md" ng-if="!task.attach_file_name">
+                                        <a class="wrapper b b-light text-center text-muted">
+                                            <i class="fa fa-plus h3 m-r-xs"></i>
+                                            附件
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="panel-footer padder pull-in b-t b-light">
+                                    <div class="clear m-b-n-sm">
+                                        <div class="pull-right text-muted">
+                                            <i class="fa fa-calendar text-info"></i>
+                                            截止日期：
+                                            <span class="text-danger">{{task.deadline*1000 | date:'yyyy-MM-dd H:m:s'}}</span>
+                                            <span class="label pos-rlt m-l inline bg-danger">
+                                                 <i class="arrow left arrow-danger"></i>
+                                                {{week}}
+                                            </span>
+                                            <span class="label bg-danger m-l-xs wapper"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-dark">
+                            <span class="tl-date" ng-if="task.isDeadline==1">截止{{task.deadline*1000 | date:'yyyy.MM.dd  HH:mm:ss'}}</span>
+                            <span class="tl-date" ng-if="task.isDeadline==0">此刻</span>
+                            <div class="tl-content panel padder b-a block " ng-init="seeMorePanel=true">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt h4 font-bold" ng-click="seeMorePanel = !seeMorePanel">
+                                    <span href class="auto m-t-xs">
+                                        <span class="pull-right text-muted wapper">
+                                            <i class="fa fa-fw fa-angle-right fa-lg" ng-class='{hide:seeMorePanel}'></i>
+                                            <i class="fa fa-fw fa-angle-down fa-lg" ng-class='{hide:!seeMorePanel}'></i>
+                                        </span>
+                                    </span>
+                                    <span class="m-r-sm" ng-if="task.is_apply_group==0"><span class="text-success">{{task.uploaded_count}}</span> 人已交</span>
+                                    <span class="m-r-sm" ng-if="task.is_apply_group!=0"><span class="text-success">{{task.uploaded_count}}</span> 个小组已交</span>
+                                    <span class="m-t-xs" ng-if="task.is_apply_group==0"><span class="text-danger">{{task.noUpload_count}}</span> 人未交</span>
+                                    <span class="m-t-xs" ng-if="task.is_apply_group!=0"><span class="">{{task.noUpload_count}}</span> 个小组未交</span>
+                                </div>
+                                <div class="panel-body m-t-sm no-padder pull-in b-t" collapse="!seeMorePanel">
+
+                                    <!-- 显示方式按钮 -->
+                                    <div class="wrapper-sm clear" ng-init="showHwInfoPanel = true;showHwInfoTable = false">
+
+                                        <div class="pull-left">
+                                            <a class="btn btn-sm btn-info m-r-xs">
+                                                <i class="fa fa-pencil m-r-xs"></i>
+                                                评阅
+                                            </a>
+                                            <a class="btn btn-sm btn-danger m-r-xs">
+                                                <i class="fa fa-bell m-r-xs"></i>
+                                                催交
+                                            </a>
+                                            <!--<a class="btn btn-sm btn-primary m-r-xs">-->
+                                                <!--<i class="fa fa-inbox m-r-xs"></i>-->
+                                                <!--打包-->
+                                            <!--</a>-->
+                                            <!--<a class="btn btn-sm btn-success m-r-xs">-->
+                                                <!--<i class="fa fa-cloud-download m-r-xs"></i>-->
+                                                <!--下载-->
+                                            <!--</a>-->
+                                        </div>
+                                        <div class="btn-group pull-right">
+                                            <button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showHwInfoPanel}" ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i class="fa fa-th-large"></i></button>
+                                            <button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showHwInfoTable}" ng-click="showHwInfoPanel=!showHwInfoPanel;showHwInfoTable=!showHwInfoTable"><i class="fa fa-list-ul"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- /显示方式按钮 -->
+                                    <!-- 显示方式1 -->
+                                    <div class="row m-t-xs padder" ng-class="{hide:!showHwInfoPanel}" ng-if="others[0]">
+                                        <div class="col-xs-3 col-md-2 col-lg-1 wrapper-xs" ng-repeat="other in others">
+                                            <div class="panel b-a">
+                                                <div class="panel-heading r-t r-r text-center {{app.settings.asideColor}} lt">{{(task.is_apply_group==0)?other.student_name:other.group_name}}</div>
+                                                <div class="hbox text-center b-t b-light" ng-if="other.status==0">
+                                                    <span href class="col padder-v text-danger" title="他还未交作业">
+                                                    <i class="fa fa-frown-o"></i>
+                                                    <small>未交</small>
+                                                    </span>
+                                                </div>
+                                                <div class="hbox text-center b-t b-light" ng-if="other.status==1">
+                                                    <a class="col padder-v b-r b-light text-success" title="点击查看他的作业" ng-click="">
+                                                        <i class="fa fa-file-word-o"></i>
+                                                    </a>
+                                                    <span href class="col padder-v text-muted">
+                                                        <small>{{(other.grade!=0)?other.grade+' 分':'未评'}}</small>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /显示方式1 -->
+                                    <!-- 显示方式2 -->
+                                    <div class="table-responsive m-t" ng-class="{hide:!showHwInfoTable}" ng-if="others[0]">
+                                        <table class="table table-striped b-t b-light">
+                                            <thead>
+                                            <tr>
+                                                <th>姓名</th>
+                                                <th>状态</th>
+                                                <th>得分</th>
+                                                <th>操作</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody class="b-b">
+                                            <tr ng-repeat="other in others">
+                                                <td ng-class="{'text-muted':other.status==0}">{{(task.is_apply_group==0)?other.student_name:other.group_name}}</td>
+                                                <td>
+                                                    <small class="text-success" ng-if="other.status==1"><i class="fa fa-check"></i> 已交</small>
+                                                    <small class="text-danger" ng-if="other.status==0"><i class="fa fa-times"></i> 未交</small>
+                                                </td>
+                                                <td>
+                                                    <span class="font-bold" ng-if="other.grade!=0">{{other.grade}} 分</span>
+                                                    <small class="text-muted" ng-if="other.grade==0">未评分</small>
+                                                </td>
+                                                <td ng-if="other.status==0">
+                                                    <small class="text-muted">不可操作</small>
+                                                </td>
+                                                <td ng-if="other.status==1">
+                                                    <a class="btn btn-xs btn-info">
+                                                        <i class="fa fa-pencil"></i>
+                                                        评阅
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <!-- /显示方式2 -->
+                                    <div ng-if="!others[0]">
+                                        <h2 class="text-center text-muted m-t-xxl m-b-xxl">暂无学生信息</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="tl-item">
+                        <div class="tl-wrap b-success" ng-if="task.isDeadline==0">
+                            <span class="tl-date">此刻</span>
+                            <div class="tl-content panel padder b-a">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt font-bold text-success">收集中···</div>
+                            </div>
+                        </div>
+                        <div class="tl-wrap b-danger" ng-if="task.isDeadline==1">
+                            <span class="tl-date">{{task.deadline*1000 | date:'yyyy.MM.dd  HH:mm:ss'}}</span>
+                            <div class="tl-content panel padder b-a">
+                                <span class="arrow left pull-up"></span>
+                                <div class="text-lt font-bold text-danger">已截止</div>
+                            </div>
+                        </div>
+                    </li>
+                    <!--<li class="tl-header">-->
+                        <!--<div class="btn btn-sm btn-dark btn-rounded">作业收集完毕</div>-->
+                    <!--</li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /主体 -->
+    <div ng-include="'tpl/teacher/task/tpls/taskComment.html'"></div>
+</div>
+
+<div ng-if="!task">
+    <h2 class="text-center text-muted m-t-xxl">任务不存在！</h2>
+</div>
+
+

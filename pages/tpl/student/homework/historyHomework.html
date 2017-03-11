@@ -1,0 +1,75 @@
+<!--
+  @历史作业
+  @作者：dyxm
+  @创建时间：2017-01-3
+-->
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- 主体 -->
+    <div class="col">
+        <!-- 面包屑导航 -->
+        <div class="bg-light lter b-b wrapper-md m-b-md">
+            <ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+                <li>作业</li>
+                <li class="active">已交作业</li>
+            </ol>
+        </div>
+        <!-- /面包屑导航 -->
+
+        <div class="wrapper">
+            <div class="row padder">
+                <div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="homework in homeworks">
+                    <div class="panel b-a">
+                        <div class="panel-heading b-b {{app.settings.asideColor}} lter">
+                            <div>
+                                <a class="media" href="#/student/homeworkDetail/{{homework.homework_id}}">
+							<span class="pull-left">
+								<i class="fa fa-check fa-lg text-info-dk" ng-if="homework.status==1"></i>
+								<i class="fa fa-times fa-lg text-danger" ng-if="homework.status==0"></i>
+							</span>
+                                    <span class="pull-right">
+								<i class="fa fa-fw fa-angle-right fa-lg"></i>
+							</span>
+                                    <span class="media-body clear">
+								<span class="h4 font-bold m-n text-ellipsis">{{'【'+homework.course_name+'】'+homework.task_name}}</span>
+							</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="list-group no-radius alt">
+                            <li class="list-group-item" href>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-5">
+                                        <i class="fa fa-building fa-fw"></i>
+                                        班级：
+                                    </div>
+                                    <div class="col-xs-6 col-sm-7 text-ellipsis">
+                                        <a class="text-muted" href="#">{{homework.class_name}}</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-book fa-fw"></i>
+                                科任老师：<a class="pull-right text-muted" href="#">{{homework.teacher_name}}</a>
+                            </li>
+                            <li class="list-group-item">
+                                <i class="fa fa-calendar fa-fw"></i>
+                                截止日期：<span class="pull-right text-muted">{{homework.deadline}}</span>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 分页 -->
+        <div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+        </div>
+        <!-- /分页 -->
+
+        <div ng-if="!homeworks">
+            <h2 class="text-center text-muted m-t-xxl">现在的学生作业真的是太少了！</h2>
+        </div>
+    </div>
+</div>
+

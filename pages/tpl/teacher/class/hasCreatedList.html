@@ -1,0 +1,305 @@
+<!--
+  @已建班级
+  @作者：dyxm
+  @创建时间：2017-01-7
+-->
+<style>
+	.nav-tabs-alt .nav-tabs > li > a{
+		color: #98a6ad;
+		background-color: #f6f8f8 !important;
+	}
+	.nav-tabs-alt .nav-tabs > li.active > a{
+		color: #555;
+		background-color: #f3f5f6 !important;
+	}
+</style>
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<!-- 导航栏右部新建班级按钮 -->
+			<div>
+				<a class="btn btn-md btn-dark pull-right m-t-n-xs" data-toggle="modal" data-target="#createClassModal">
+					<i class="fa fa-plus m-r-xs"></i>
+					新建班级
+				</a>
+				<!-- 新建班级模态框 -->
+				<div class="modal fade" id="createClassModal" tabindex="-1" role="dialog" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button class="close" data-dismiss="modal" aria-hidden="true">
+									<i class="fa fa-times"></i>
+								</button>
+								<h4 class="modal-title font-bold">新建临时班级</h4>
+							</div>
+							<div class="modal-body">
+								<form role="form">
+									<div class="form-group">
+										<label>应用班级</label>
+										<select name="" class="form-control" prompt="Plaese Choose">
+											<option class="text-muted">请选择一个班级</option>
+											<option>option 1</option>
+											<option>option 2</option>
+											<option>option 3</option>
+											<option>option 4</option>
+										</select>
+										<!-- <input type="email" class="form-control" placeholder="Enter email"> -->
+									</div>
+									<div class="form-group">
+										<label>应用课程</label>
+										<select name="" class="form-control" prompt="Plaese Choose">
+											<option class="text-muted">请选择一门课程</option>
+											<option>option 1</option>
+											<option>option 2</option>
+											<option>option 3</option>
+											<option>option 4</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<label>作业</label>
+										<input type="email" class="form-control" placeholder="Enter email">
+									</div>
+									<div class="checkbox">
+										<label class="i-checks">
+											<input type="checkbox" checked disabled><i></i> Check me out
+										</label>
+									</div>
+									<button type="submit" class="btn btn-sm btn-primary">Submit</button>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button class="btn btn-default" data-dismiss="modal">关闭</button>
+								<button class="btn btn-dark">确定</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /新建班级模态框 -->
+			</div>
+			<!-- /导航栏右部新建班级按钮 -->
+
+			<!-- 导航栏内容 -->
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>班级管理</li>
+				<li class="active">已建班级</li>
+			</ol>
+			<!-- /导航栏内容 -->
+		</div>
+		<!-- 面包屑导航 -->
+		
+		<!-- 已建班级列表 -->
+		<tabset class="nav-tabs-alt" justified="true">
+			<!-- 可用班级列表 -->
+			<tab>
+				<tab-heading class="font-bold">
+					<h4>
+						<i class="fa fa-building-o fa-fw"></i>
+						可用班级
+					</h4>
+				</tab-heading>
+				<form name="onClassForm">
+					<!-- 按钮栏 -->
+					<div class="wrapper-sm m-b-sm bg-light dk" ng-init="editOnClass = true;seleteAllOnClass = false">
+						<div class="clear">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-dark m-n animated fadeInLeft" ng-class="{hide:editOnClass||seleteAllOnClass}" ng-click="seleteAllOnClass=!seleteAllOnClass;">全选</button>
+
+								<button class="btn btn-sm btn-dark m-n" ng-class="{hide:!seleteAllOnClass}" ng-click="seleteAllOnClass=!seleteAllOnClass;">取消全选</button>
+
+								<button class="btn btn-sm btn-danger m-n animated fadeInLeft" ng-class="{hide:editOnClass}">禁用</button>
+							</div>
+							<div class="pull-right">
+								<button class="btn btn-sm btn-dark m-n animated fadeIn" ng-class="{hide:!editOnClass}" ng-click="editOnClass=!editOnClass;">
+									<i class="fa fa-pencil-square-o"></i>
+									编辑
+								</button>
+
+								<button class="btn btn-sm btn-success m-n animated fadeIn" ng-class="{hide:editOnClass}" ng-click="editOnClass=!editOnClass;seleteAllOnClass = false">
+									<i class="fa fa-check"></i>
+									完成
+								</button>
+							</div>
+						</div>
+					</div>
+					<!-- /按钮栏 -->
+					<div class="row padder form-group">
+						<div class="col-xs-12 col-sm-6 col-lg-4">
+							<div class="panel b-a m-t-sm">
+								<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+									<div>
+										<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOnClass}" >
+											<label class="i-checks">
+												<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOnClass" value="">
+												<i></i>
+											</label>
+										</div>
+										<div class="media m-n">
+											<span class="pull-left">
+												<i class="fa fa-building-o fa-lg text-info-dk"></i>
+											</span>
+											<span class="pull-right animated fadeInRight" ng-class="{hide:editOnClass}" >
+												<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOnClass=!editOnClass;">
+												禁用
+												</button>
+											</span>
+											<a class="media-body clear" href="#/main/classDetail/1">
+												<span class="pull-right" ng-class="{hide:!editOnClass}" >
+													<i class="fa fa-fw fa-angle-right fa-lg"></i>
+												</span>
+												<h4 class="font-bold m-n text-ellipsis">[选修]舞蹈鉴赏</h4>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="list-group no-radius alt">
+									<li class="list-group-item">
+										<i class="fa fa-clock-o fa-fw"></i> 
+										适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-users fa-fw"></i> 
+										人数：<span class="pull-right text-muted"><span>255</span> 人</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-calendar fa-fw"></i> 
+										有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+									</li>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-lg-4">
+							<div class="panel b-a m-t-sm">
+								<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+									<div>
+										<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOnClass}" >
+											<label class="i-checks">
+												<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOnClass" value="">
+												<i></i>
+											</label>
+										</div>
+										<div class="media m-n">
+											<span class="pull-left">
+												<i class="fa fa-building-o fa-lg text-info-dk"></i>
+											</span>
+											<span class="pull-right animated fadeInRight" ng-class="{hide:editOnClass}" >
+												<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOnClass=!editOnClass;">
+												禁用
+												</button>
+											</span>
+											<a class="media-body clear" href="#/main/classDetail/1">
+												<span class="pull-right" ng-class="{hide:!editOnClass}" >
+													<i class="fa fa-fw fa-angle-right fa-lg"></i>
+												</span>
+												<h4 class="font-bold m-n text-ellipsis">[选修]信息技术与创业</h4>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="list-group no-radius alt">
+									<li class="list-group-item">
+										<i class="fa fa-clock-o fa-fw"></i> 
+										适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-users fa-fw"></i> 
+										人数：<span class="pull-right text-muted"><span>60</span> 人</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-calendar fa-fw"></i> 
+										有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+									</li>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</tab>
+			<!-- /可用班级列表 -->
+
+			<!-- 失效班级列表 -->
+			<tab>
+				<tab-heading class="font-bold">
+					<h4>
+						<i class="fa fa-building-o fa-fw"></i>
+						失效班级
+					</h4>
+				</tab-heading>
+				<form name="offClassForm">
+					<div class="wrapper-sm m-b-sm bg-light dk" ng-init="editOffClass = true;seleteAllOffClass = false">
+						<div class="clear">
+							<div class="pull-left">
+								<button class="btn btn-sm btn-dark m-n animated fadeInLeft" ng-class="{hide:editOffClass||seleteAllOffClass}" ng-click="seleteAllOffClass=!seleteAllOffClass;">全选</button>
+
+								<button class="btn btn-sm btn-dark m-n" ng-class="{hide:!seleteAllOffClass}" ng-click="seleteAllOffClass=!seleteAllOffClass;">取消全选</button>
+
+								<button class="btn btn-sm btn-danger m-n animated fadeInLeft" ng-class="{hide:editOffClass}">删除</button>
+							</div>
+							<div class="pull-right">
+								<button class="btn btn-sm btn-dark m-n animated fadeIn" ng-class="{hide:!editOffClass}" ng-click="editOffClass=!editOffClass;">
+									<i class="fa fa-pencil-square-o"></i>
+									编辑
+								</button>
+
+								<button class="btn btn-sm btn-bg btn-success m-n animated fadeIn" ng-class="{hide:editOffClass}" ng-click="editOffClass=!editOffClass;seleteAllOffClass = false">
+									<i class="fa fa-check"></i>
+									完成
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="row padder form-group">
+						<div class="col-xs-12 col-sm-6 col-lg-4">
+							<div class="panel b-a m-t-sm">
+								<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+									<div>
+										<div class="pull-left m-r-xs animated fadeInLeft" ng-class="{hide:editOffClass}" >
+											<label class="i-checks">
+												<input type="checkbox" name="seletedClasses" ng-checked="seleteAllOffClass" value="">
+												<i></i>
+											</label>
+										</div>
+										<div class="media m-n">
+											<span class="pull-left">
+												<i class="fa fa-building-o fa-lg text-muted"></i>
+											</span>
+											<span class="pull-right animated fadeInRight" ng-class="{hide:editOffClass}" >
+												<button class="btn btn-xs btn-danger pull-right m-n" ng-click="editOffClass=!editOffClass;">
+												删除
+												</button>
+											</span>
+											<a class="media-body clear" href="#/main/classDetail/1">
+												<span class="pull-right" ng-class="{hide:!editOffClass}" >
+													<i class="fa fa-fw fa-angle-right fa-lg"></i>
+												</span>
+												<h4 class="font-bold m-n text-ellipsis">[选修]信息技术与创业</h4>
+											</a>
+										</div>
+									</div>
+								</div>
+								<div class="list-group no-radius alt">
+									<li class="list-group-item">
+										<i class="fa fa-clock-o fa-fw"></i> 
+										适用：<span class="pull-right text-muted">2016-2017学年上学期</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-users fa-fw"></i> 
+										人数：<span class="pull-right text-muted"><span>255</span> 人</span>
+									</li>
+									<li class="list-group-item">
+										<i class="fa fa-calendar fa-fw"></i> 
+										有效期至：<span class="pull-right text-muted">2017-08-31 23:59:59</span>
+									</li>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</tab>
+			<!-- /失效班级列表 -->
+		</tabset>
+		<!-- /已建班级列表 -->
+	</div>
+	<!-- /主体 -->
+</div>

@@ -1,0 +1,99 @@
+<!--
+  @展示一个分组模态框Tpl
+  @作者：dyxm
+  @创建时间：2017-03-3
+-->
+<!-- 设置加入分组口令模态框 -->
+<script type="text/ng-template" id="showGroup.html">
+    <div class="modal-header">
+        <button class="close" ng-click="close()">
+            <i class="fa fa-times"></i>
+        </button>
+        <h3 class="modal-title font-bold text-center">{{group.group_name}}</h3>
+    </div>
+    <div class="bg-light lter wrapper-sm m-b-sm b-b">
+        <div class="clear">
+            <div class="pull-left m-t-xs text-muted font-bold">
+                小组共 <span class="text-success">{{group.member_count}}</span> 人
+            </div>
+            <div class="pull-right" ng-if="group.leader_id==userInfo.id">
+                <button class="btn btn-dark" ng-click="edit()" ng-class="{hide:!groupEdit}">编辑</button>
+                <button class="btn btn-info" ng-click="edit()" ng-class="{hide:groupEdit}">完成</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="clear padder">
+            <span class="pull-left text-muted m-t-xs"><i class="fa fa-user text-info m-r-xs"></i>组长</span>
+            <div class="btn-group pull-right" ng-if="group.leader_id==userInfo.id" ng-class="{hide:groupEdit}">
+                <button class="btn btn-danger" ng-click="dissolveGroup(group.group_id)">解散该组</button>
+            </div>
+        </div>
+        <div class="padder">
+            <div class="row m-t-xs padder animated fadeInRight">
+                <div ng-repeat="member in group.members">
+                    <div class="col-xs-4 col-sm-3 col-lg-2 no-padder" ng-if="group.leader_id==member.student_id">
+                        <div class="panel panel-default">
+                            <div class="panel-heading no-padder bg-black lter">
+                                <div class="clearfix text-center">
+                                    <div class="thumb-md m-t m-b-xs">
+                                        <img src="../{{member.face}}" class="img-circle" alt="{{member.name}}">
+                                    </div>
+                                    <div class="m-b-xs text-white">
+                                        <i class="fa m-r-xs" ng-class="{'fa-male text-info':member.sex==0,'fa-female text-danger':member.sex==1}"></i>
+                                        {{member.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body no-padder">
+                                <ul class="list-group m-n">
+                                    <li class="list-group-item no-border text-center text-ellipsis">{{member.stu_number}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear padder">
+            <span class="pull-left text-muted m-b-xs"><i class="fa fa-users text-info m-r-xs"></i>组员</span>
+        </div>
+        <div class="padder">
+            <div class="row m-t-xs padder animated fadeInRight">
+                <div ng-repeat="member in group.members">
+                    <div class="col-xs-4 col-sm-3 col-lg-2 no-padder" ng-if="group.leader_id!=member.student_id">
+                        <div class="panel panel-default">
+                            <div class="panel-heading no-padder bg-black lter">
+                                <div class="clearfix text-center">
+                                    <div class="thumb-md m-t m-b-xs">
+                                        <img src="../{{member.face}}" class="img-circle" alt="{{member.name}}">
+                                    </div>
+                                    <div class="m-b-xs text-white">
+                                        <i class="fa m-r-xs" ng-class="{'fa-male text-info':member.sex==0,'fa-female text-danger':member.sex==1}"></i>
+                                        {{member.name}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body no-padder">
+                                <ul class="list-group m-n" ng-class="{hide:!groupEdit}">
+                                    <li class="list-group-item no-border text-center text-ellipsis">{{member.stu_number}}</li>
+                                </ul>
+                                <button class="btn btn-danger lter btn-block" ng-click="removeMember($index, group.group_id, member.student_id)" ng-class="{hide:groupEdit}">移出该组</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="group.member_count==1">
+                <h3 class="text-center text-muted m-t-l m-b-xxl">暂无成员加入</h3>
+            </div>
+        </div>
+    </div>
+    <div class="text-center m-t-lg m-b-lg" ng-if="group.leader_id!=userInfo.id && group.member_count<max_member_count">
+        <button class="btn btn-success lter" ng-click="joinGroup(group.group_id)">立即加入</button>
+    </div>
+    <div ng-if="group.member_count>=max_member_count">
+        <h3 class="text-center text-success m-t-l m-b-xxl"><i class="fa fa-check"></i> 小组已满人</h3>
+    </div>
+</script>
+<!-- /设置加入分组口令模态框 -->

@@ -1,0 +1,77 @@
+<!--
+  @我的课程
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<div class="hbox hbox-auto-xs">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>课程</li>
+				<li class="active">
+					<span ng-if="$stateParams.course_type==0">专业必修</span>
+					<span ng-if="$stateParams.course_type==1">公共必修</span>
+					<span ng-if="$stateParams.course_type==2">选修课程</span>
+				</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+
+		<!-- 课程列表 -->
+		<div class="wrapper">
+			<div class="row padder">
+				<div class="col-xs-12 col-sm-6 col-lg-4" ng-repeat="course in courses">
+					<div class="panel b-a m-t-sm">
+						<div class="panel-heading b-b {{app.settings.asideColor}} lter">
+							<div>
+								<a class="media" href="#/student/courseDetail/{{course.course_class_id}}">
+									<span class="pull-left">
+										<i class="fa fa-book fa-lg text-info-dk"></i>
+									</span>
+									<span class="pull-right">
+										<i class="fa fa-fw fa-angle-right fa-lg"></i>
+									</span>
+									<div class="media-body clear">
+										<h4 class="font-bold m-n text-ellipsis">{{course.course_name}}</h4>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="list-group">
+							<li class="list-group-item">
+								<i class="fa fa-mortar-board fa-fw"></i> 
+								任课老师：<a class="pull-right text-muted font-bold" href="#">{{course.teacher_name}}</a>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-clock-o fa-fw"></i> 
+								适用：<span class="pull-right text-muted font-bold">{{course.term_year+'学年第'+course.term+'学期'}}</span>
+							</li>
+							<li class="list-group-item">
+								<i class="fa fa-calendar fa-fw"></i> 
+								分组截止：
+								<span class="pull-right text-danger" ng-if="course.is_group!=0">{{course.grouping_deadline}}</span>
+								<span class="pull-right text-muted" ng-if="course.is_group==0">未开启分组功能</span>
+							</li>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 课程列表 -->
+
+		<!-- 分页 -->
+		<div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+			<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+		</div>
+		<!-- /分页 -->
+
+		<div ng-if="!courses[0]">
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==0">竟然没有专业课！</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==1">您还没有任何公共必修记录！</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==2">您还没有选修记录！</h2>
+		</div>
+	</div>
+	<!-- /主体 -->
+</div>

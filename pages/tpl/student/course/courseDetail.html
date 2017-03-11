@@ -1,0 +1,200 @@
+<!--
+  @课程详情
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<div class="hbox hbox-auto-xs" ng-init="courseMoreDetail = true;editCourseInfo = false;">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>课程</li>
+				<li><a ui-sref="main.myCourse">我的课程</a></li>
+				<li class="active">{{courseInfo.course_name}}</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+		<!-- 课程详情 -->
+		<div class="wrapper">
+			<div class="row padder">
+				<div class="panel b-a m-t-sm">
+					<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter"> 
+						<a class="media" href ng-click="courseMoreDetail=!courseMoreDetail">
+							<span class="pull-left">
+								<i class="fa fa-book fa-lg text-info-dk"></i>
+							</span>
+							<span class="pull-right text-muted wapper">
+								<i class="fa fa-lg fa-angle-right" ng-class='{hide:courseMoreDetail}'></i>
+								<i class="fa fa-lg fa-angle-down" ng-class='{hide:!courseMoreDetail}'></i>
+							</span>
+							<span class="text-lt h4 text-ellipsis">{{courseInfo.course_name}}</span>
+						</a>
+					</div>
+					<!-- 课程信息 -->
+					<ul class="list-group m-n no-border" collapse="!courseMoreDetail">
+						<li class="list-group-item">
+							<i class="fa fa-mortar-board fa-fw"></i> 
+							任课老师：<a class="pull-right text-muted" href="#">{{courseInfo.teacher_name}}</a>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-clock-o fa-fw"></i> 
+							适用：<span class="pull-right text-muted" href="#">{{courseInfo.term_year+'学年第'+courseInfo.term+'学期'}}</span>
+						</li>
+						<li class="list-group-item">
+							<i class="fa fa-calendar fa-fw"></i>
+							分组截止：
+							<span class="pull-right text-danger" ng-if="courseInfo.is_group!=0">{{courseInfo.grouping_deadline}}</span>
+							<span class="pull-right text-muted" ng-if="courseInfo.is_group==0">未开启分组功能</span>
+						</li>
+						<li class="list-group-item">
+							<!--<div class="pull-right">-->
+								<!--<button class="btn btn-xs btn-dark m-n" ng-class="{hide:editCourseInfo}" ng-click="editCourseInfo=!editCourseInfo;">-->
+									<!--<i class="fa fa-pencil-square-o"></i>-->
+									<!--编辑-->
+								<!--</button>-->
+								<!--<button class="btn btn-xs btn-success m-n" ng-class="{hide:!editCourseInfo}" ng-click="editCourseInfo=!editCourseInfo">-->
+									<!--<i class="fa fa-check"></i>-->
+									<!--完成-->
+								<!--</button>-->
+							<!--</div>-->
+							<i class="fa fa-info-circle fa-fw"></i>
+							课程介绍:
+							<p class="m-t-sm" ng-class="{hide:editCourseInfo}">
+								{{courseInfo.course_info}}
+								<span class="text-muted" ng-if="!class.class_info">暂无课程的相关介绍~</span>
+							</p>
+							<!--<textarea class="form-control m-t-sm" rows="4" ng-class="{hide:!editCourseInfo}" placeholder="课程介绍...">这里是一段关于课程情况的简单介绍，任课老师及更高级管理员有权编辑更改</textarea>-->
+						</li>
+					</ul>
+					<!-- /课程信息 -->
+
+					<div class="panel-body m-b no-padder">
+						<!-- 显示方式按钮 -->
+						<div class="bg-light lter wrapper-sm m-b-sm b-t b-b" ng-init="showGroupByPanel = true;showGroupByTable = false">
+							<div class="clear">
+								<div class="pull-left m-t-xs text-muted font-bold">
+									<span class=" m-r-sm">分组情况</span>
+								</div>
+								<div class="btn-group pull-right">
+									<button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showGroupByPanel}" ng-click="
+									showGroupByPanel? '' : showGroupByPanel=!showGroupByPanel;
+									showGroupByTable? showGroupByTable=!showGroupByTable : '' "><i class="fa fa-th-large"></i></button>
+									<button class="btn navbar-btn btn-sm btn-bg btn-default m-n" ng-class="{active:showGroupByTable}" ng-click="
+									showGroupByTable? '' : showGroupByTable=!showGroupByTable;
+									showGroupByPanel? showGroupByPanel=!showGroupByPanel : '' "><i class="fa fa-list-ul"></i></button>
+								</div>
+								<!-- <div data-ng-include=" 'tpl/course/courseTpls/courseStartGroupTpl.html' "></div> -->
+							</div>
+						</div>
+						<!-- /显示方式按钮 -->
+
+						<!-- 文字提示 -->
+						<!-- <div class="text-center text-muted m-xl">
+							<h3>本课程尚未开启分组~</h3>
+						</div> -->
+						<!-- 文字提示 -->
+						<div ng-if="courseInfo.is_group==1">
+							<div class="clear padder">
+								<div class="pull-left" ng-if="!isGroupDeadline">
+									<button class="btn btn-dark m-n {{app.settings.asideColor}} lter" ng-click="newGroup(courseInfo.course_class_id)">
+										<i class="fa fa-plus "></i> 新建分组
+									</button>
+									<div data-ng-include=" 'tpl/student/course/courseTpls/newGroupTpl.html' "></div>
+								</div>
+								<div class="pull-left" ng-if="isGroupDeadline">
+									<button class="btn btn-dark m-n disabled">已截止分组</button>
+								</div>
+								<!-- <button class="btn btn-dark pull-left m-l-n-xs">新建分组</button> -->
+								<span class="pull-right text-muted m-t-xs"><i class="fa fa-user text-info m-r-xs"></i>组长</span>
+							</div>
+							<!-- 显示方式1 -->
+							<div class="row m-t-xs m-l-xs no-padder animated fadeInRight" ng-class="{hide:!showGroupByPanel}">
+								<div class="col-xs-4 col-sm-2 wrapper-xs text-center" ng-repeat="group in groups">
+									<div class="panel panel-default">
+										<div class="panel-heading text-muted no-padder {{app.settings.asideColor}} lter">
+											<a class="block wrapper-sm" ng-click="showGroup($index,courseInfo.max_member_count,group)">
+												<span class="text-white text-ellipsis">{{group.group_name}}</span>小组
+											</a>
+										</div>
+										<div class="panel-body no-padder">
+											<ul class="list-group m-n b-info">
+												<li class="list-group-item text-info text-ellipsis" ng-if="group.leader_id!=userInfo.id">
+													<i class="fa fa-user text-info m-r-xs"></i>
+													{{group.leader_name}}
+													<!-- <span class="visible-lg pull-right">1305553101</span> -->
+												</li>
+												<li class="list-group-item text-info" ng-if="group.leader_id==userInfo.id">
+													<i class="fa fa-user text-info m-r-xs"></i>我
+												</li>
+												<li class="list-group-item" ng-if="group.member_count<courseInfo.max_member_count">
+													<small class="text-muted"><i class="fa fa-smile-o"></i> 未满人</small>
+												</li>
+												<li class="list-group-item" ng-if="courseInfo.max_member_count<=group.member_count">
+													<small class="text-success"><i class="fa fa-check"></i> 已满人</small>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div data-ng-include=" 'tpl/student/course/courseTpls/showGroupTpl.html' "></div>
+							</div>
+							<!-- /显示方式1 -->
+
+							<!-- 显示方式2 -->
+							<div class="table-responsive m-t-sm animated fadeInRight" ng-class="{hide:!showGroupByTable}">
+								<table class="table table-striped b-t m-b-none b-light">
+									<thead>
+										<tr>
+											<th>组名</th>
+											<th>状态</th>
+											<th>姓名</th>
+											<th>学号</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody ng-repeat="group in groups">
+										<tr class="b-b" ng-init="group_index=$index">
+											<td class="b-r v-middle no-border" rowspan="{{group.member_count+1}}">{{group.group_name}}</td>
+											<td class="b-r v-middle no-border" rowspan="{{group.member_count+1}}" ng-if="group.member_count>=courseInfo.max_member_count">
+												<span class="text-success" ng-if="group.member_count>=courseInfo.max_member_count"><i class="fa fa-check"></i> 已满人</span>
+											</td>
+											<td class="b-r v-middle no-border" rowspan="{{group.member_count+1}}" ng-if="group.member_count<courseInfo.max_member_count">
+												<!--<span class="text-muted"><i class="fa fa-smile-o"></i> 未满人</span>-->
+												<button class="btn  btn-info" ng-if="group.leader_id!=userInfo.id" ng-click="joinGroup(group_index,group.group_id)">立即加入</button>
+												<span class="text-muted" ng-if="group.leader_id==userInfo.id"><i class="fa fa-smile-o"></i> 未满人</span>
+											</td>
+										</tr>
+										<tr class="b-b" ng-repeat="member in group.members">
+											<td class="text-info" ng-if="group.leader_id==member.student_id">
+												<i class="fa fa-user text-info m-r-xs"></i>
+												<span ng-if="member.student_id==userInfo.id">我</span>
+												<span ng-if="member.student_id!=userInfo.id">{{member.name}}</span>
+											</td>
+											<td ng-if="group.leader_id!=member.student_id">
+												<span ng-if="member.student_id==userInfo.id">我</span>
+												<span ng-if="member.student_id!=userInfo.id">{{member.name}}</span>
+											</td>
+											<td class="text-info" ng-if="group.leader_id==member.student_id">{{member.stu_number}}</td>
+											<td ng-if="group.leader_id!=member.student_id">{{member.stu_number}}</td>
+											<td ng-if="group.leader_id==userInfo.id">
+												<button class="btn btn-xs btn-danger" ng-if="member.student_id==userInfo.id" ng-click="dissolveGroup(group_index,group.group_id)">解散该组</button>
+												<button class="btn btn-xs btn-info" ng-if="member.student_id!=userInfo.id" ng-click="removeMember(group_index, $index, group.group_id, member.student_id)">移出该组</button>
+											</td>
+											<td ng-if="group.leader_id!=userInfo.id"><small class="text-muted">不可操作</small></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /显示方式2 -->
+						</div>
+						<div ng-if="courseInfo.is_group==0">
+							<h2 class="text-center text-muted m-t-xxl m-b-xxl">课程暂未开启分组功能！</h2>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- /课程详情 -->
+	</div>
+</div>

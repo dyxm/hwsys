@@ -1,0 +1,27 @@
+<!--
+  @临时班级
+  @作者：dyxm
+  @创建时间：2017-01-7
+-->
+<div class="hbox hbox-auto-xs">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<!-- 新建班级 -->
+			<div data-ng-include=" 'tpl/class/classTpls/createClassTpl.html' "></div>
+			<!-- /新建班级 -->
+
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>班级管理</li>
+				<li class="active">我的班级</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+
+		<!-- 班级列表 -->
+		<div data-ng-include=" 'tpl/class/classTpls/tempClassTpl.html' "></div>
+		<!-- /班级列表 -->
+	</div>
+	<!-- /主体 -->
+</div>

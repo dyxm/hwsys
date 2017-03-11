@@ -1,0 +1,73 @@
+<!--
+  @我的课程
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<div class="hbox hbox-auto-xs">
+	<!-- 主体 -->
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<div>
+				<a class="btn btn-md pull-right m-t-n-xs m-l" ng-init="isEdit=false" ng-click="isEdit=!isEdit" ng-class="{'btn-dark':!isEdit,'btn-success':isEdit}">
+					<i class="fa fa-edit m-r-xs" ng-if="!isEdit"></i>
+					{{isEdit?'完成':'编辑'}}
+				</a>
+				<a class="btn btn-md btn-dark pull-right m-t-n-xs m-l">
+					<i class="fa fa-plus m-r-xs"></i>
+					新建课程
+				</a>
+			</div>
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>课程</li>
+				<li class="active">
+					<span ng-if="$stateParams.course_type==0">专业必修</span>
+					<span ng-if="$stateParams.course_type==1">公共必修</span>
+					<span ng-if="$stateParams.course_type==2">选修课程</span>
+				</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+
+		<!-- 课程列表 -->
+		<div class="wrapper">
+			<div class="row padder">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" ng-repeat="course in courses">
+					<div class="panel b-a m-t-sm">
+						<a class="panel-heading block padder-v item m-n {{app.settings.asideColor}} lter" href="#/teacher/courseDetail/{{course.course_id}}">
+							<span class="block wrapper-sm m-n font-bold text-center text-white text-ellipsis h4">{{course.course_name}}</span>
+						</a>
+						<div class="panel-body text-center">
+							<span class="text-ellipsis" ng-class="{'text-muted':!course.info}">{{course.info?course.info:'暂无简介'}}</span>
+						</div>
+						<div class="panel-footer clear" ng-if="!isEdit">
+							<span class="pull-right text-muted">{{course.course_create_date}}</span>
+						</div>
+						<div class="panel-footer hbox text-center text-sm no-padder" ng-if="isEdit">
+							<a href="" class="col padder-v text-muted b-r b-light h4">
+								<i class="fa fa-pencil block"></i>
+							</a>
+							<a href="" class="col padder-v text-muted h4">
+								<i class="fa fa-trash-o block"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 课程列表 -->
+
+		<!-- 分页 -->
+		<div class="text-center m-t-lg m-b-lg" ng-if="totalItems>perPage">
+			<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" max-size="maxSize" class="pagination-md  m-b" boundary-links="true" rotate="false" num-pages="numPages"></pagination>
+		</div>
+		<!-- /分页 -->
+
+		<div ng-if="!courses[0]">
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==0">暂无开设专业课程</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==1">暂无开设公共必修课程</h2>
+			<h2 class="text-center text-muted m-t-xxl m-b-xxl" ng-if="$stateParams.course_type==2">暂无开设选修课程</h2>
+		</div>
+	</div>
+	<!-- /主体 -->
+</div>

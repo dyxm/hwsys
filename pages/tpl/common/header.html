@@ -1,0 +1,170 @@
+<!--
+  @顶部导航主体
+  @作者：dyxm
+  @创建时间：2017-01-3
+-->
+<!-- 顶部导航左部logo部分 -->
+<div class="navbar-header {{app.settings.navbarHeaderColor}}">
+	<button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+		<i class="glyphicon glyphicon-cog"></i>
+	</button>
+	<button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
+		<i class="glyphicon glyphicon-align-justify"></i>
+	</button>
+	<!-- logo -->
+	<a href="#/" class="navbar-brand text-lt">
+		<i class="fa fa-folder-open-o"></i>
+		<img src="img/logo.png" alt="." class="hide">
+		<span class="hidden-folded m-l-xs">{{app.name}}</span>
+	</a>
+	<!-- /logo -->
+</div>
+<!-- /顶部导航左部logo部分 -->
+
+<!-- 顶部导航collapse部分 -->
+<div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+	<!-- 前进后退按钮 -->
+	<div class="nav navbar-nav hidden-xs btn-group">
+		<a href type="button" class="btn navbar-btn btn-sm btn-bg btn-default" title="后退" ng-click="goBack()">
+            <i class="fa fa-chevron-left"></i>
+        </a>
+		<a type="button" class="btn navbar-btn btn-sm btn-bg btn-default" title="前进" ng-click="goPrev()">
+            <i class="fa fa-chevron-right"></i>
+        </a>
+	</div>
+	<!-- /前进后退按钮 -->
+
+	<!-- 搜索表单 -->
+	<form class="navbar-form navbar-form-sm navbar-left shift" ui-shift="prependTo" target=".navbar-collapse" role="search" ng-controller="TypeaheadDemoCtrl">
+		<div class="form-group">
+			<div class="input-group">
+				<input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8" class="form-control input-sm bg-light no-border rounded padder" placeholder="Search projects...">
+				<span class="input-group-btn">
+					<button type="submit" class="btn btn-sm bg-light rounded"><i class="fa fa-search"></i></button>
+				</span>
+			</div>
+		</div>
+	</form>
+	<!-- /搜索表单 -->
+
+	<!-- 导航右部 -->
+	<ul class="nav navbar-nav navbar-right">
+		<li class="hidden-xs">
+			<div class="nav navbar-nav hidden-xs">
+				<a href class="btn no-shadow navbar-btn" ng-click="app.settings.asideFolded = !app.settings.asideFolded">
+					<i class="fa {{app.settings.asideFolded ? 'fa-indent' : 'fa-dedent'}} fa-fw"></i>
+				</a>
+
+			</div>
+		</li>
+		<!-- 全屏按钮 -->
+		<li class="hidden-xs">
+			<a ui-fullscreen></a>
+		</li>
+		<!-- /全屏按钮 -->
+		<!-- 消息 -->
+		<li class="dropdown" dropdown>
+			<a href class="dropdown-toggle" dropdown-toggle>
+				<i class="icon-bell fa-fw"></i>
+				<span class="visible-xs-inline">我的消息</span>
+				<span class="badge badge-sm up bg-danger pull-right-xs">2</span>
+			</a>
+			<!-- 消息下拉框 -->
+			<div class="dropdown-menu w-xl animated fadeInUp">
+				<div class="panel bg-white">
+					<div class="panel-heading b-light bg-light">
+						<strong>你有 <span>2</span> 条未读消息</strong>
+					</div>
+					<ul class="list-group">
+						<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								数据结构新作业<br>
+								<small class="text-muted">10 分钟前</small>
+							</span>
+						</a>
+						<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								数据结构《实验2》已打分<br>
+								<small class="text-muted">1 小时前</small>
+							</span>
+						</a>
+						<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								数据结构新作业<br>
+								<small class="text-muted">10 分钟前</small>
+							</span>
+						</a>
+						<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								数据结构《实验2》已打分<br>
+								<small class="text-muted">1 小时前</small>
+							</span>
+						</a>
+						<a href class="media list-group-item">
+							<span class="media-body block m-b-none">
+								数据结构新作业<br>
+								<small class="text-muted">10 分钟前</small>
+							</span>
+						</a>
+					</ul>
+					<div class="panel-footer no-padder text-center">
+						<a class="list-group-item no-border" href >查看全部消息</a>
+					</div>
+				</div>
+			</div>
+			<!-- /消息下拉框 -->
+		</li>
+		<!-- /消息 -->
+
+		<!-- 用户头像 -->
+		<li class="dropdown" dropdown>
+			<a href class="dropdown-toggle clear" dropdown-toggle>
+				<span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm">
+					<img src="img/a0.jpg" alt="...">
+					<i class="on md b-white bottom"></i>
+				</span>
+				<b class="caret"></b>
+			</a>
+			<!-- dropdown -->
+			<ul class="dropdown-menu animated fadeInRight w no-padder">
+				<li class="wrapper b-b bg-light text-center">
+					<i class="fa fa-lg m-t-xs m-r-xs" ng-class="{'fa-male text-info':userInfo.sex==0,'fa-female text-danger':userInfo.sex==1}"></i>
+					{{userInfo.name}}
+				</li>
+				<li>
+					<a class="wrapper-sm" ui-sref="access.signin">
+						<span class="block wrapper-xs">
+							<i class="fa fa-angle-right pull-right m-t-xs text-muted"></i>
+							<i class="fa fa-user m-r-xs"></i>个人中心
+						</span>
+					</a>
+				</li>
+				<li>
+					<a ui-sref="access.signin">
+						<span class="block wrapper-xs">
+							<i class="fa fa-angle-right pull-right m-t-xs text-muted"></i>
+							<i class="fa fa-question-circle m-r-xs"></i>帮助手册
+						</span>
+					</a>
+				</li>
+				<li>
+					<a ui-sref="access.signin">
+						<span class="block wrapper-xs">
+							<i class="fa fa-angle-right pull-right m-t-xs text-muted"></i>
+							<i class="fa fa-gear m-r-xs"></i>
+							设置
+						</span>
+					</a>
+				</li>
+				<li class="text-center b-t">
+					<a ng-click="logout()">
+						<span class="block wrapper-sm"><i class="fa fa-sign-out m-r-xs"></i>退出登录</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<!-- /用户头像 -->
+	</ul>
+	<!-- 导航右部 -->
+</div>
+<!-- /顶部导航collapse部分  -->

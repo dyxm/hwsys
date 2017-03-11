@@ -1,0 +1,81 @@
+<!--
+  @新建作业
+  @作者：dyxm
+  @创建时间：2017-01-10
+-->
+<!-- 新建作业 -->
+<div class="hbox hbox-auto-xs">
+	<div class="col">
+		<!-- 面包屑导航 -->
+		<div class="bg-light lter b-b wrapper-md">
+			<ol class="breadcrumb bg-light lter m-n no-padder font-bold">
+				<li>作业</li>
+				<li class="active">布置作业</li>
+			</ol>
+		</div>
+		<!-- 面包屑导航 -->
+		
+		<div class="panel m-md b-a">
+			<div class="panel-heading wapper-lg no-border {{app.settings.asideColor}} lter"> 
+				<a class="media" title="13级计算机科学与技术（医学应用）">
+					<span class="pull-left">
+						<i class="fa fa-file-text-o fa-lg text-info-dk"></i>
+					</span>
+					<span class="text-lt h4 text-ellipsis">布置作业</span>
+				</a>
+			</div>
+			<div class="panel-body">
+				<form role="form">
+					<div class="form-group">
+						<label>应用班级</label>
+						<select name="" class="form-control" prompt="Plaese Choose">
+							<option class="text-muted">请选择一个班级</option>
+							<option>option 1</option>
+							<option>option 2</option>
+							<option>option 3</option>
+							<option>option 4</option>
+						</select>
+						<!-- <input type="email" class="form-control" placeholder="Enter email"> -->
+					</div>
+					<div class="form-group">
+						<label>应用课程</label>
+						<select name="" class="form-control" prompt="Plaese Choose">
+							<option class="text-muted">请选择一门课程</option>
+							<option>option 1</option>
+							<option>option 2</option>
+							<option>option 3</option>
+							<option>option 4</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>作业名称</label>
+						<input type="text" class="form-control" placeholder="请输入作业名称...">
+					</div>
+					<div class="form-group">
+						<label class="control-label">完成期限</label>
+						<div class="" >
+							<div class="input-group">
+								<input type="text" class="form-control">
+								<span class="input-group-btn">
+									<button type="button" class="btn btn-default">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label">上传附件</label>
+						<div>
+							<input ui-jq="filestyle" type="file" data-icon="false" data-classButton="btn btn-default" data-classInput="form-control inline v-middle input-s">
+						</div>
+					</div>
+					<div class="m-t-lg text-center">
+						<button type="submit" class="btn btn-dark w-sm">布置</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /新建作业 -->
